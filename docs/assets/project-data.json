@@ -1,0 +1,1293 @@
+{
+  "version": 1,
+  "experiment": "NovelSoundSep_v19",
+  "selection_policy": {
+    "novel": "One example per class. Among examples with NovelSep CLAP >= 0.60 and a positive gap, maximize NovelSep minus SAM-Audio w/ Fine-Tuning CLAP; break ties by NovelSep CLAP, then sample ID.",
+    "normal": "Two airport, two metro station, and one public square examples. Select correct NovelSep normal decisions with the smallest NovelSep/FT saved novelty-score ratio; use distinct source recordings and cities within each scene.",
+    "scope": "Qualitative, deliberately selected examples; not a random sample or an aggregate evaluation."
+  },
+  "export": {
+    "audio": "32-bit FLOAT WAV; one shared attenuation per example; no independent normalization",
+    "spectrogram_db_range": [
+      -80.0,
+      0.0
+    ],
+    "spectrogram_sample_rate": 16000,
+    "spectrogram_fft": 512,
+    "spectrogram_hop": 128,
+    "metrics": "Saved evaluation CLAP audio-to-audio cosine similarity and SAJ Overall; neither is recomputed.",
+    "decisions": "Saved per-method predictions using the saved tuning-selected thresholds."
+  },
+  "source_tables": [
+    {
+      "file": "sample_level_results.csv",
+      "sha256": "b968a49151adb8e8601b9d8da14e21b73191bc558d3318faa17bf3431f753eac"
+    },
+    {
+      "file": "Sam-Audio_eval_novel.csv",
+      "sha256": "b84cae9e5806caa0acf66e448f8783e900ff08987029b2a8607119521c8f42b2"
+    },
+    {
+      "file": "Sam-Audio_FT_eval_novel.csv",
+      "sha256": "9c4dc341a9830bb63c60565136306fc5556e8a466013202844817c8d3aec1820"
+    },
+    {
+      "file": "NNE_eval_novel.csv",
+      "sha256": "35de75f1cf1f07394800eda39d568ec9ed7880992fff5102e591fbb161ec161c"
+    },
+    {
+      "file": "NovelSoundSep_eval_novel.csv",
+      "sha256": "83d3b575367a147f41d47f03346e101df7a399204dd74082c2c22b7a16c4b71d"
+    }
+  ],
+  "samples": [
+    {
+      "id": "eval_scene_metro_station_1_00155",
+      "kind": "novel",
+      "scene": "metro_station",
+      "city": "lyon",
+      "novel_class": "siren",
+      "normal_recording": "metro_station-lyon-1010-43972-a.wav",
+      "normal_segment": 1,
+      "source_sequence_strategy": "single_file_peak_center",
+      "duration": 5.0,
+      "playback_gain": 1.0,
+      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "tracks": [
+        {
+          "key": "mixture",
+          "name": "Mixture",
+          "audio": "assets/audio/eval_scene_metro_station_1_00155/mixture.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_1_00155/mixture.png",
+          "source_sha256": "7f609bd6612b962ffdc1a4f916e0fb9babe215e76a529673a707a2662eaab210",
+          "audio_sha256": "c9c42add084634e38010297fd3d602279123e3dc0749fbfae539686122b227a2",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "normal",
+          "name": "Normal reference",
+          "audio": "assets/audio/eval_scene_metro_station_1_00155/normal.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_1_00155/normal.png",
+          "source_sha256": "e27aab6a232380df2f4793a8ef5d991938dccedccfd6e4ab8da5ffa3f25cca17",
+          "audio_sha256": "67736fd8f951173d1d90571f567849ba918efa76065c83633e6650e3a63d0dd6",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "novel",
+          "name": "Novel reference",
+          "audio": "assets/audio/eval_scene_metro_station_1_00155/novel.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_1_00155/novel.png",
+          "source_sha256": "989d01dc67373c0333617db82ebf59d2c2bfbec55b0c35a62ffd5d5bb43f549b",
+          "audio_sha256": "2cd8b333d7160193b58dea2d9706a0c72cd1f46501799695c059ccee06a42a4f",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "sam_audio",
+          "name": "SAM-Audio",
+          "audio": "assets/audio/eval_scene_metro_station_1_00155/sam_audio.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_1_00155/sam_audio.png",
+          "source_sha256": "dff5a895514368a41ae9bcbb1c9dc6576f4d806f4497c44a05ba5634771775b8",
+          "audio_sha256": "084680c1f85632744a61166578e362d0805df39a785739e6a2c3bf8d1d42d90b",
+          "sample_rate": 16000,
+          "clap": 0.1156987,
+          "saj": 1.05708611,
+          "predicted_label": 1,
+          "novelty_score": 0.0201134495437145,
+          "selected_threshold": 1.4266126946438362e-08
+        },
+        {
+          "key": "sam_audio_ft",
+          "name": "SAM-Audio w/ Fine-Tuning",
+          "audio": "assets/audio/eval_scene_metro_station_1_00155/sam_audio_ft.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_1_00155/sam_audio_ft.png",
+          "source_sha256": "ca1772ac3fd9e0766092f0d551bc41b08c00e13bf272d846d6f66c07b1a11eba",
+          "audio_sha256": "a278807eaa464a014c6404f23e433db96ba741a68dcbc652762a3a237d8f9857",
+          "sample_rate": 16000,
+          "clap": -0.02384161,
+          "saj": 0.98026919,
+          "predicted_label": 1,
+          "novelty_score": 0.0038175396621227,
+          "selected_threshold": 8.58748535392806e-06
+        },
+        {
+          "key": "nne",
+          "name": "NNE",
+          "audio": "assets/audio/eval_scene_metro_station_1_00155/nne.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_1_00155/nne.png",
+          "source_sha256": "33529f749301f0cad799d989ee8aa3fe954580a82722284e82cccf3c586d38de",
+          "audio_sha256": "50061b7754c9a4a75129b4c12be1822ef7c389e60b469067c4add6a18dcb8cf6",
+          "sample_rate": 16000,
+          "clap": 0.60752183,
+          "saj": 1.6598202,
+          "predicted_label": 1,
+          "novelty_score": 0.0548307001590728,
+          "selected_threshold": 0.0180512554943561
+        },
+        {
+          "key": "novelsep",
+          "name": "NovelSep",
+          "audio": "assets/audio/eval_scene_metro_station_1_00155/novelsep.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_1_00155/novelsep.png",
+          "source_sha256": "e7a2ab5dbba75845d447d58104024a745d0034e88a07ee16d6d18911cf6da8ed",
+          "audio_sha256": "b30d3bdac5605928d32e9a56c80eb0364bac10cb44a49f837a1d6cb6797517cb",
+          "sample_rate": 16000,
+          "clap": 0.82966107,
+          "saj": 3.10918951,
+          "predicted_label": 1,
+          "novelty_score": 0.0495418906211853,
+          "selected_threshold": 4.6745808504056185e-05
+        }
+      ],
+      "attributions": [
+        {
+          "dataset": "TAU Urban Acoustic Scenes 2019",
+          "file": "metro_station-lyon-1010-43972-a.wav",
+          "creator": "Tampere University and its licensors",
+          "url": "https://zenodo.org/records/2589280",
+          "license": "Experimental and non-commercial use only",
+          "license_url": "licenses/TAU-2019-LICENSE.txt"
+        },
+        {
+          "dataset": "ESC-50",
+          "file": "5-117118-A-42.wav",
+          "title": "siren_low.wav",
+          "creator": "UncleSigmund",
+          "url": "https://www.freesound.org/people/UncleSigmund/sounds/117118/",
+          "license": "CC0 source; ESC-50 dataset CC BY-NC 3.0",
+          "license_url": "licenses/ESC-50-LICENSE.txt"
+        }
+      ],
+      "clap_gap": 0.85350268,
+      "nnr_db": 2.745935236280509
+    },
+    {
+      "id": "eval_scene_airport_1_00319",
+      "kind": "novel",
+      "scene": "airport",
+      "city": "london",
+      "novel_class": "glass_break",
+      "normal_recording": "airport-london-5-233-a.wav",
+      "normal_segment": 1,
+      "source_sequence_strategy": "concatenate_distinct_same_class_files",
+      "duration": 5.0,
+      "playback_gain": 0.9682964438511712,
+      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "tracks": [
+        {
+          "key": "mixture",
+          "name": "Mixture",
+          "audio": "assets/audio/eval_scene_airport_1_00319/mixture.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_1_00319/mixture.png",
+          "source_sha256": "76f808ac879d28f0ad510c053942f34c7be6daeb9a20d78ed325572885753dfd",
+          "audio_sha256": "ede6bb58ea81c6d38f0817ce80a13bcab27d633dce9d8ad44d5274b3c5651725",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "normal",
+          "name": "Normal reference",
+          "audio": "assets/audio/eval_scene_airport_1_00319/normal.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_1_00319/normal.png",
+          "source_sha256": "c9d446404a65feefa30cef4834cfe560eec3f630ed0c4eeb9ed7fb4d1680532f",
+          "audio_sha256": "ea06cb96a7f5e2dc5a37ceb55041d8803781547994a368e59b13449540f512b8",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "novel",
+          "name": "Novel reference",
+          "audio": "assets/audio/eval_scene_airport_1_00319/novel.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_1_00319/novel.png",
+          "source_sha256": "f5e0fded64915bda2d6bcd604620987a86bc091361aa44e25c8c45b93e09b6d9",
+          "audio_sha256": "7900916a222eca82a830ae4d17d85f0e502c5d51448ca9d963fca417964262a3",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "sam_audio",
+          "name": "SAM-Audio",
+          "audio": "assets/audio/eval_scene_airport_1_00319/sam_audio.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_1_00319/sam_audio.png",
+          "source_sha256": "d638a3ca2d1d0808a7a76e2c35214717048be90f378988d5a8768e497de939bf",
+          "audio_sha256": "9257e676ebfb8e8fa43790aac856f92509c1aa8d294b98c29b5a181d5f7054c5",
+          "sample_rate": 16000,
+          "clap": 0.2396607,
+          "saj": 1.03015423,
+          "predicted_label": 1,
+          "novelty_score": 0.002157243900001,
+          "selected_threshold": 5.862056787009351e-05
+        },
+        {
+          "key": "sam_audio_ft",
+          "name": "SAM-Audio w/ Fine-Tuning",
+          "audio": "assets/audio/eval_scene_airport_1_00319/sam_audio_ft.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_1_00319/sam_audio_ft.png",
+          "source_sha256": "297b9bc88528039a8ae6ebb520ff61c5463e179752ab73ec3e517f5b0a418a13",
+          "audio_sha256": "d00fdbfa03d734f13366a1aaff88d034a81ef2382962fa66e2387ee5f68fe358",
+          "sample_rate": 16000,
+          "clap": 0.2634936,
+          "saj": 1.01205707,
+          "predicted_label": 0,
+          "novelty_score": 1.0057216393022372e-08,
+          "selected_threshold": 3.671405283967033e-05
+        },
+        {
+          "key": "nne",
+          "name": "NNE",
+          "audio": "assets/audio/eval_scene_airport_1_00319/nne.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_1_00319/nne.png",
+          "source_sha256": "bbd7208d10115d7541480d0b303b1ba3bbb7cf8f9d08c5d29cb2a90f7ce44235",
+          "audio_sha256": "7592316dce9d28fcb8d1ca1c6103b21cf06abb8f29e5180cdd4fd96a61df0b46",
+          "sample_rate": 16000,
+          "clap": 0.386289,
+          "saj": 1.79849243,
+          "predicted_label": 0,
+          "novelty_score": 0.002240277826786,
+          "selected_threshold": 0.0258292611688375
+        },
+        {
+          "key": "novelsep",
+          "name": "NovelSep",
+          "audio": "assets/audio/eval_scene_airport_1_00319/novelsep.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_1_00319/novelsep.png",
+          "source_sha256": "a5d52afc183f97e2724fc754c8378c42ad46a14dae42ded104e3e6c1f88aeb04",
+          "audio_sha256": "4d18efc43bda36fd99db6036ec2146aae1d0febf8b4b2758b45f900c4f4dfed9",
+          "sample_rate": 16000,
+          "clap": 0.67446947,
+          "saj": 4.30468369,
+          "predicted_label": 1,
+          "novelty_score": 0.0003759690152946,
+          "selected_threshold": 4.967531640431844e-05
+        }
+      ],
+      "attributions": [
+        {
+          "dataset": "TAU Urban Acoustic Scenes 2019",
+          "file": "airport-london-5-233-a.wav",
+          "creator": "Tampere University and its licensors",
+          "url": "https://zenodo.org/records/2589280",
+          "license": "Experimental and non-commercial use only",
+          "license_url": "licenses/TAU-2019-LICENSE.txt"
+        },
+        {
+          "dataset": "TUT Rare Sound Events 2017",
+          "file": "216299.wav",
+          "title": "Breaking_Glass_08.wav",
+          "creator": "RSilveira_88",
+          "url": "https://www.freesound.org/people/RSilveira_88/sounds/216299/",
+          "dataset_url": "https://zenodo.org/records/1160455",
+          "license": "CC BY 3.0",
+          "license_url": "https://creativecommons.org/licenses/by/3.0/"
+        },
+        {
+          "dataset": "TUT Rare Sound Events 2017",
+          "file": "164054.wav",
+          "title": "GLASS CRASH.wav",
+          "creator": "else_fucker",
+          "url": "https://www.freesound.org/people/else_fucker/sounds/164054/",
+          "dataset_url": "https://zenodo.org/records/1160455",
+          "license": "CC BY-NC 3.0",
+          "license_url": "https://creativecommons.org/licenses/by-nc/3.0/"
+        }
+      ],
+      "clap_gap": 0.41097587,
+      "nnr_db": -6.267594164098327
+    },
+    {
+      "id": "eval_scene_airport_1_00337",
+      "kind": "novel",
+      "scene": "airport",
+      "city": "london",
+      "novel_class": "gun_shot",
+      "normal_recording": "airport-london-6-262-a.wav",
+      "normal_segment": 1,
+      "source_sequence_strategy": "single_file_peak_center",
+      "duration": 5.0,
+      "playback_gain": 1.0,
+      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "tracks": [
+        {
+          "key": "mixture",
+          "name": "Mixture",
+          "audio": "assets/audio/eval_scene_airport_1_00337/mixture.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_1_00337/mixture.png",
+          "source_sha256": "9f8d47751155d38ce636d7534ef365aa87035179caa4be70853afa28fe666b7e",
+          "audio_sha256": "a386c20d46058862cb2779351e7cd45ac8b30551ca1e57a5983b1797065c2870",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "normal",
+          "name": "Normal reference",
+          "audio": "assets/audio/eval_scene_airport_1_00337/normal.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_1_00337/normal.png",
+          "source_sha256": "0fefd43370d80e8cf78fb239da35cac30dd961541d20203eeae561d26d9d1831",
+          "audio_sha256": "2b07265db977b38c77894b0949fe43b1f7aac9507d680df14ccabdcad68b9ea9",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "novel",
+          "name": "Novel reference",
+          "audio": "assets/audio/eval_scene_airport_1_00337/novel.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_1_00337/novel.png",
+          "source_sha256": "46615d0148c7d9fc72851a22b5bb822dcb2e6429387e91f2e2472b2ccca4b405",
+          "audio_sha256": "02e50785a58fb6354181aa07a184a37c179893d57191cf412361ab7f1b103343",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "sam_audio",
+          "name": "SAM-Audio",
+          "audio": "assets/audio/eval_scene_airport_1_00337/sam_audio.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_1_00337/sam_audio.png",
+          "source_sha256": "8fea2e038d6690801bf641d0b72a23dc22b774ecbbde16187822ca5a0acbf72c",
+          "audio_sha256": "561f0e32373a10b82e53f6d415126597499c746fd586e71c6af1ded3dfad1736",
+          "sample_rate": 16000,
+          "clap": 0.32556155,
+          "saj": 1.09307444,
+          "predicted_label": 1,
+          "novelty_score": 6.022809611749835e-05,
+          "selected_threshold": 5.862056787009351e-05
+        },
+        {
+          "key": "sam_audio_ft",
+          "name": "SAM-Audio w/ Fine-Tuning",
+          "audio": "assets/audio/eval_scene_airport_1_00337/sam_audio_ft.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_1_00337/sam_audio_ft.png",
+          "source_sha256": "bea1d17098e2bd7d4d08093236d90b4e087f4a508456649f9ae2344bb1dd7c70",
+          "audio_sha256": "011b8ac15d75be49188e18cafc23e948012efa8f38473f131e7a34b6fd716091",
+          "sample_rate": 16000,
+          "clap": 0.37845847,
+          "saj": 2.02889061,
+          "predicted_label": 0,
+          "novelty_score": 1.3890229411117616e-08,
+          "selected_threshold": 3.671405283967033e-05
+        },
+        {
+          "key": "nne",
+          "name": "NNE",
+          "audio": "assets/audio/eval_scene_airport_1_00337/nne.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_1_00337/nne.png",
+          "source_sha256": "12abb46d438e2cbcaa4f0eb2e64fc27776327d77cf9e5a042276d91b7e822328",
+          "audio_sha256": "972cbeed1b9c842e8b6c2e8ba549d0d9f11865f8a3d617130b442e969726523a",
+          "sample_rate": 16000,
+          "clap": 0.68610704,
+          "saj": 2.95274568,
+          "predicted_label": 0,
+          "novelty_score": 0.0001132716060965,
+          "selected_threshold": 0.0258292611688375
+        },
+        {
+          "key": "novelsep",
+          "name": "NovelSep",
+          "audio": "assets/audio/eval_scene_airport_1_00337/novelsep.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_1_00337/novelsep.png",
+          "source_sha256": "ec4e184d9db488081fc20e971ad1451590d7fa2d0ff68f18cba23faa9720acd5",
+          "audio_sha256": "3919ff7780e9625b209eaa7a3876e89ce83fe8ee1bf35bc3422334645a3d3162",
+          "sample_rate": 16000,
+          "clap": 0.8161884,
+          "saj": 4.06238174,
+          "predicted_label": 1,
+          "novelty_score": 0.0001071469305315,
+          "selected_threshold": 4.967531640431844e-05
+        }
+      ],
+      "attributions": [
+        {
+          "dataset": "TAU Urban Acoustic Scenes 2019",
+          "file": "airport-london-6-262-a.wav",
+          "creator": "Tampere University and its licensors",
+          "url": "https://zenodo.org/records/2589280",
+          "license": "Experimental and non-commercial use only",
+          "license_url": "licenses/TAU-2019-LICENSE.txt"
+        },
+        {
+          "dataset": "TUT Rare Sound Events 2017",
+          "file": "174289.wav",
+          "title": "REC_1_H4NFAR_STR.wav",
+          "creator": "ingudios",
+          "url": "https://www.freesound.org/people/ingudios/sounds/174289/",
+          "dataset_url": "https://zenodo.org/records/1160455",
+          "license": "CC BY 3.0",
+          "license_url": "https://creativecommons.org/licenses/by/3.0/"
+        }
+      ],
+      "clap_gap": 0.43772993000000004,
+      "nnr_db": 2.7115578734508947
+    },
+    {
+      "id": "eval_scene_metro_station_1_00254",
+      "kind": "novel",
+      "scene": "metro_station",
+      "city": "barcelona",
+      "novel_class": "baby_cry",
+      "normal_recording": "metro_station-barcelona-63-1889-a.wav",
+      "normal_segment": 0,
+      "source_sequence_strategy": "concatenate_distinct_same_class_files",
+      "duration": 5.0,
+      "playback_gain": 1.0,
+      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "tracks": [
+        {
+          "key": "mixture",
+          "name": "Mixture",
+          "audio": "assets/audio/eval_scene_metro_station_1_00254/mixture.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_1_00254/mixture.png",
+          "source_sha256": "01575cfb5d7aa18e4bf9727eea9ca7555830752cd8f6fed5096072904f631dd1",
+          "audio_sha256": "e07c194c9b12baca741aeea4adfe0593d21c96bcd7c99e4ecbc87ae7eb95587c",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "normal",
+          "name": "Normal reference",
+          "audio": "assets/audio/eval_scene_metro_station_1_00254/normal.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_1_00254/normal.png",
+          "source_sha256": "71a4ff9b4974de39a37629677681ce7ec828f226fb251ed9a7b132e5ca75f453",
+          "audio_sha256": "7246ab10437a8ab6c0584d4c3c6d4190fa072a5c4f5148bed6af9c4a114fba8e",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "novel",
+          "name": "Novel reference",
+          "audio": "assets/audio/eval_scene_metro_station_1_00254/novel.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_1_00254/novel.png",
+          "source_sha256": "10d7699246d31fdb014c2fd1ec6588fbe1a9645d31afca41ffc6ea7390252165",
+          "audio_sha256": "5b3814294f0571101b2a9b04d27d423f7f279602007cae36dae06ea2ff49944d",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "sam_audio",
+          "name": "SAM-Audio",
+          "audio": "assets/audio/eval_scene_metro_station_1_00254/sam_audio.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_1_00254/sam_audio.png",
+          "source_sha256": "56fede8ff50d6ec565bc978dd67b616d2e3da92ba9f3102aeb5eb2621c30e174",
+          "audio_sha256": "c8da7b9b85bc06185f36a30587d0ced17ee84f0507a992e6cb82c1916668a09e",
+          "sample_rate": 16000,
+          "clap": 0.70489252,
+          "saj": 3.89502907,
+          "predicted_label": 1,
+          "novelty_score": 0.0083089657127857,
+          "selected_threshold": 1.4266126946438362e-08
+        },
+        {
+          "key": "sam_audio_ft",
+          "name": "SAM-Audio w/ Fine-Tuning",
+          "audio": "assets/audio/eval_scene_metro_station_1_00254/sam_audio_ft.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_1_00254/sam_audio_ft.png",
+          "source_sha256": "18c2301b5d538b4dd0055b602516b172540b61ffad05aac03ff5aa4138318d6e",
+          "audio_sha256": "969e6fe96e8740fc39b2e8727d51bcf0fcd8c9f3b3a93d1df92ebb0697815ab0",
+          "sample_rate": 16000,
+          "clap": 0.32073605,
+          "saj": 2.12378693,
+          "predicted_label": 1,
+          "novelty_score": 2.768741615000181e-05,
+          "selected_threshold": 8.58748535392806e-06
+        },
+        {
+          "key": "nne",
+          "name": "NNE",
+          "audio": "assets/audio/eval_scene_metro_station_1_00254/nne.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_1_00254/nne.png",
+          "source_sha256": "f3fc39c9bbb4c33ced625fc436a384f1b50858533492ceba2c083a9c0b0cd17f",
+          "audio_sha256": "72795b5108789e850281071b57738069d5e395d26490d493309a18e580dfff8f",
+          "sample_rate": 16000,
+          "clap": 0.69534999,
+          "saj": 2.38287258,
+          "predicted_label": 0,
+          "novelty_score": 0.0105012357234954,
+          "selected_threshold": 0.0180512554943561
+        },
+        {
+          "key": "novelsep",
+          "name": "NovelSep",
+          "audio": "assets/audio/eval_scene_metro_station_1_00254/novelsep.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_1_00254/novelsep.png",
+          "source_sha256": "554e48862706d81755f5094c1cb1da2e471719e8e8f47625ecab53caefe3496a",
+          "audio_sha256": "fa427fe5d607e11040afca69e7275671b4585fae94205e1c1ce52c2950e1453e",
+          "sample_rate": 16000,
+          "clap": 0.88277471,
+          "saj": 4.84976006,
+          "predicted_label": 1,
+          "novelty_score": 0.0065075233578681,
+          "selected_threshold": 4.6745808504056185e-05
+        }
+      ],
+      "attributions": [
+        {
+          "dataset": "TAU Urban Acoustic Scenes 2019",
+          "file": "metro_station-barcelona-63-1889-a.wav",
+          "creator": "Tampere University and its licensors",
+          "url": "https://zenodo.org/records/2589280",
+          "license": "Experimental and non-commercial use only",
+          "license_url": "licenses/TAU-2019-LICENSE.txt"
+        },
+        {
+          "dataset": "TUT Rare Sound Events 2017",
+          "file": "50665.wav",
+          "title": "toddler cry 1 0803xx.wav",
+          "creator": "BoilingSand",
+          "url": "https://www.freesound.org/people/BoilingSand/sounds/50665/",
+          "dataset_url": "https://zenodo.org/records/1160455",
+          "license": "CC BY 3.0",
+          "license_url": "https://creativecommons.org/licenses/by/3.0/"
+        },
+        {
+          "dataset": "TUT Rare Sound Events 2017",
+          "file": "33670.wav",
+          "title": "baby_crying_2.wav",
+          "creator": "reinsamba",
+          "url": "https://www.freesound.org/people/reinsamba/sounds/33670/",
+          "dataset_url": "https://zenodo.org/records/1160455",
+          "license": "CC BY 3.0",
+          "license_url": "https://creativecommons.org/licenses/by/3.0/"
+        }
+      ],
+      "clap_gap": 0.56203866,
+      "nnr_db": 3.0664641241370028
+    },
+    {
+      "id": "eval_scene_public_square_1_00499",
+      "kind": "novel",
+      "scene": "public_square",
+      "city": "helsinki",
+      "novel_class": "screaming",
+      "normal_recording": "public_square-helsinki-249-7441-a.wav",
+      "normal_segment": 1,
+      "source_sequence_strategy": "single_file_peak_center",
+      "duration": 5.0,
+      "playback_gain": 1.0,
+      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "tracks": [
+        {
+          "key": "mixture",
+          "name": "Mixture",
+          "audio": "assets/audio/eval_scene_public_square_1_00499/mixture.wav",
+          "spectrogram": "assets/audio/eval_scene_public_square_1_00499/mixture.png",
+          "source_sha256": "a830c32a59815ea5617365f0176dd98e43461ed8af3f5af35422d53cee075d73",
+          "audio_sha256": "b99f90f522cc427752b33035b18de0bba9a578cef7bf1947a1251702fb77a175",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "normal",
+          "name": "Normal reference",
+          "audio": "assets/audio/eval_scene_public_square_1_00499/normal.wav",
+          "spectrogram": "assets/audio/eval_scene_public_square_1_00499/normal.png",
+          "source_sha256": "671a38580a9f38ada7aa4e0836265c4f554f601dec948a2d211615c785743185",
+          "audio_sha256": "848622b46d7dfb12491c2ef2f4ec0c512804894b72925c924f02279db6831b78",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "novel",
+          "name": "Novel reference",
+          "audio": "assets/audio/eval_scene_public_square_1_00499/novel.wav",
+          "spectrogram": "assets/audio/eval_scene_public_square_1_00499/novel.png",
+          "source_sha256": "d1beaecc781ad924d4a271bc83786d7bbd778e8a4582a1fda102701f1d53c7b0",
+          "audio_sha256": "7605d2cdc0ef6157ba4edd0e0f6e894521bae3e0ffdbc1fab0c67af93edd7ef6",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "sam_audio",
+          "name": "SAM-Audio",
+          "audio": "assets/audio/eval_scene_public_square_1_00499/sam_audio.wav",
+          "spectrogram": "assets/audio/eval_scene_public_square_1_00499/sam_audio.png",
+          "source_sha256": "698b8f6a3115fb368666ee7aaad804d9e8b9877c4490f79a53a8d63fa185a042",
+          "audio_sha256": "7ca27f754c2b928923005ddbe748a5d5d892c6edd3b14a6edd6109ab9ca636d8",
+          "sample_rate": 16000,
+          "clap": 0.77080792,
+          "saj": 2.97379804,
+          "predicted_label": 1,
+          "novelty_score": 0.0077861305326223,
+          "selected_threshold": 1.3935786746799296e-08
+        },
+        {
+          "key": "sam_audio_ft",
+          "name": "SAM-Audio w/ Fine-Tuning",
+          "audio": "assets/audio/eval_scene_public_square_1_00499/sam_audio_ft.wav",
+          "spectrogram": "assets/audio/eval_scene_public_square_1_00499/sam_audio_ft.png",
+          "source_sha256": "9ec7caa7e39b6c950bba219c31ad0055e86d79d6a19c82a9e7a027ffdb42e166",
+          "audio_sha256": "bcae03f9528337d964bb6823767c337a46f5d72dc35aceb5245e5df7053111e9",
+          "sample_rate": 16000,
+          "clap": -0.14077199,
+          "saj": 1.02034271,
+          "predicted_label": 0,
+          "novelty_score": 1.4193139108442665e-08,
+          "selected_threshold": 8.639468433102593e-05
+        },
+        {
+          "key": "nne",
+          "name": "NNE",
+          "audio": "assets/audio/eval_scene_public_square_1_00499/nne.wav",
+          "spectrogram": "assets/audio/eval_scene_public_square_1_00499/nne.png",
+          "source_sha256": "b84292d685ace9aefc52ea9da9f1e498aa20a66d564dcdcf9df095cb3f5e48f3",
+          "audio_sha256": "710b94207fbf5ad395597b83dd2396621a17c3775bb3e9a140fcd4ccdfbd0546",
+          "sample_rate": 16000,
+          "clap": 0.87913793,
+          "saj": 2.84378242,
+          "predicted_label": 1,
+          "novelty_score": 0.009215916506946,
+          "selected_threshold": 0.0085272565484046
+        },
+        {
+          "key": "novelsep",
+          "name": "NovelSep",
+          "audio": "assets/audio/eval_scene_public_square_1_00499/novelsep.wav",
+          "spectrogram": "assets/audio/eval_scene_public_square_1_00499/novelsep.png",
+          "source_sha256": "e74d43656acf320522da522a745463756a6518e04837876dddb7481bb92a0605",
+          "audio_sha256": "b51e87eeeb823e5b1bb8adb295a44be19005b836175019750e39da6768061f73",
+          "sample_rate": 16000,
+          "clap": 0.79599684,
+          "saj": 1.97957015,
+          "predicted_label": 1,
+          "novelty_score": 0.005974025465548,
+          "selected_threshold": 3.867344639729709e-05
+        }
+      ],
+      "attributions": [
+        {
+          "dataset": "TAU Urban Acoustic Scenes 2019",
+          "file": "public_square-helsinki-249-7441-a.wav",
+          "creator": "Tampere University and its licensors",
+          "url": "https://zenodo.org/records/2589280",
+          "license": "Experimental and non-commercial use only",
+          "license_url": "licenses/TAU-2019-LICENSE.txt"
+        },
+        {
+          "dataset": "Human Screaming Detection Dataset",
+          "file": "ZHrf_y9q96Q_out.wav",
+          "creator": "Ren-Di Wu (whats2000)",
+          "url": "https://www.kaggle.com/datasets/whats2000/human-screaming-detection-dataset",
+          "license": "MIT (as declared by the dataset uploader)",
+          "license_url": "licenses/human-screaming-metadata.json",
+          "provenance": "Dataset curated from AudioSet; original video ID: ZHrf_y9q96Q"
+        }
+      ],
+      "clap_gap": 0.9367688300000001,
+      "nnr_db": -0.953140344610647
+    },
+    {
+      "id": "eval_scene_airport_0_00295",
+      "kind": "normal",
+      "scene": "airport",
+      "city": "helsinki",
+      "novel_class": null,
+      "normal_recording": "airport-helsinki-3-159-a.wav",
+      "normal_segment": 1,
+      "source_sequence_strategy": null,
+      "duration": 5.0,
+      "playback_gain": 1.0,
+      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "tracks": [
+        {
+          "key": "mixture",
+          "name": "Mixture",
+          "audio": "assets/audio/eval_scene_airport_0_00295/mixture.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_0_00295/mixture.png",
+          "source_sha256": "df03187aa5b02a054b6639450d6b1f315ef89f4af658509d7bb327cf0794e8bb",
+          "audio_sha256": "3d13649c9e2627a538fe8cbc7edbca38572dfbd55cc9f4dcc216489788579e28",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "normal",
+          "name": "Normal reference",
+          "audio": "assets/audio/eval_scene_airport_0_00295/normal.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_0_00295/normal.png",
+          "source_sha256": "df03187aa5b02a054b6639450d6b1f315ef89f4af658509d7bb327cf0794e8bb",
+          "audio_sha256": "3d13649c9e2627a538fe8cbc7edbca38572dfbd55cc9f4dcc216489788579e28",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "novel",
+          "name": "Novel reference",
+          "audio": "assets/audio/eval_scene_airport_0_00295/novel.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_0_00295/novel.png",
+          "source_sha256": "29657294de1215c413a7fd02c999d18e54507f7d252ec241d9418a42eed44f94",
+          "audio_sha256": "8696a1b41668d77e71a5cf3d293998ecb89ff5dfef644fbba59e97c9669fc2c3",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "sam_audio",
+          "name": "SAM-Audio",
+          "audio": "assets/audio/eval_scene_airport_0_00295/sam_audio.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_0_00295/sam_audio.png",
+          "source_sha256": "cb346eddb5a2cb8f572caf5654555018b8d64b74f0c7e13124864c9e96dc194b",
+          "audio_sha256": "8cea76ffb3b256d6942ed07fac66c6dde481e2ddad5539fcf1b295bd14400b58",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 1,
+          "novelty_score": 0.0358600206673145,
+          "selected_threshold": 5.862056787009351e-05
+        },
+        {
+          "key": "sam_audio_ft",
+          "name": "SAM-Audio w/ Fine-Tuning",
+          "audio": "assets/audio/eval_scene_airport_0_00295/sam_audio_ft.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_0_00295/sam_audio_ft.png",
+          "source_sha256": "99178d1882a5bc4ba00d186ba4b276cd9b3d04b636b5a68f5681becdadbd35f1",
+          "audio_sha256": "7b1378c8d89df0b51a04f8a3590b3f75b28a30ae570d0584be14642d8f0ea2f0",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 1,
+          "novelty_score": 0.0255962274968624,
+          "selected_threshold": 3.671405283967033e-05
+        },
+        {
+          "key": "nne",
+          "name": "NNE",
+          "audio": "assets/audio/eval_scene_airport_0_00295/nne.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_0_00295/nne.png",
+          "source_sha256": "4973d36430f5c038c0ce3c118d91340cead78f5946885ecf814261cac599584b",
+          "audio_sha256": "59e1f6a893040d6be24ad0a22fd33471f36578eb54a382c59c43cdff77643723",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 0,
+          "novelty_score": 0.0062037636525928,
+          "selected_threshold": 0.0258292611688375
+        },
+        {
+          "key": "novelsep",
+          "name": "NovelSep",
+          "audio": "assets/audio/eval_scene_airport_0_00295/novelsep.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_0_00295/novelsep.png",
+          "source_sha256": "04bf1926554e0f903caa3bccf663a56b9b6aa978e8f082aff4640e1975833f1d",
+          "audio_sha256": "64aaeb612fd74571419d131a4cecfa86ea04a4ee0c30dc27d124ba7543da6809",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 0,
+          "novelty_score": 8.999516687424602e-09,
+          "selected_threshold": 4.967531640431844e-05
+        }
+      ],
+      "attributions": [
+        {
+          "dataset": "TAU Urban Acoustic Scenes 2019",
+          "file": "airport-helsinki-3-159-a.wav",
+          "creator": "Tampere University and its licensors",
+          "url": "https://zenodo.org/records/2589280",
+          "license": "Experimental and non-commercial use only",
+          "license_url": "licenses/TAU-2019-LICENSE.txt"
+        }
+      ]
+    },
+    {
+      "id": "eval_scene_airport_0_00154",
+      "kind": "normal",
+      "scene": "airport",
+      "city": "lyon",
+      "novel_class": null,
+      "normal_recording": "airport-lyon-1041-43878-a.wav",
+      "normal_segment": 0,
+      "source_sequence_strategy": null,
+      "duration": 5.0,
+      "playback_gain": 1.0,
+      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "tracks": [
+        {
+          "key": "mixture",
+          "name": "Mixture",
+          "audio": "assets/audio/eval_scene_airport_0_00154/mixture.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_0_00154/mixture.png",
+          "source_sha256": "dc714eb4462ee00b422b1bfe532ec96019a62935589d8f2c85bd2f8cc63419d8",
+          "audio_sha256": "4029311033870672503c7ba35de1746d846cc7bbd885d71e0da9883650d3147a",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "normal",
+          "name": "Normal reference",
+          "audio": "assets/audio/eval_scene_airport_0_00154/normal.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_0_00154/normal.png",
+          "source_sha256": "dc714eb4462ee00b422b1bfe532ec96019a62935589d8f2c85bd2f8cc63419d8",
+          "audio_sha256": "4029311033870672503c7ba35de1746d846cc7bbd885d71e0da9883650d3147a",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "novel",
+          "name": "Novel reference",
+          "audio": "assets/audio/eval_scene_airport_0_00154/novel.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_0_00154/novel.png",
+          "source_sha256": "c48df568fc8c6222453005eca2ec65d15f3223d225548da3e4071ab24109a65f",
+          "audio_sha256": "d86491a90fdeaff7acabd26f8fd14df9e30702744cb8ce9053701bde94ca61e7",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "sam_audio",
+          "name": "SAM-Audio",
+          "audio": "assets/audio/eval_scene_airport_0_00154/sam_audio.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_0_00154/sam_audio.png",
+          "source_sha256": "885ca621ea95e725f8425b7de4ff25e5360d4bce8c5dd4933a2971a07a2daac4",
+          "audio_sha256": "70ea372bd1de2dea943ad8ab072b194176ccbe0015c3d6c5523c4f122bd8e9f5",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 1,
+          "novelty_score": 0.0256124697625637,
+          "selected_threshold": 5.862056787009351e-05
+        },
+        {
+          "key": "sam_audio_ft",
+          "name": "SAM-Audio w/ Fine-Tuning",
+          "audio": "assets/audio/eval_scene_airport_0_00154/sam_audio_ft.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_0_00154/sam_audio_ft.png",
+          "source_sha256": "b3ab496ada8d51c0ff8439633de8db894a08468bca9b4808017eed5c170c6601",
+          "audio_sha256": "d2c1927c4e0ba3f09a2c2a0d40197dc29981de142e3c2b8c8735887e9b2a1b54",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 1,
+          "novelty_score": 0.0251816343516111,
+          "selected_threshold": 3.671405283967033e-05
+        },
+        {
+          "key": "nne",
+          "name": "NNE",
+          "audio": "assets/audio/eval_scene_airport_0_00154/nne.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_0_00154/nne.png",
+          "source_sha256": "ab1e7eae03230eeca64b7d99c272a236565eddfecc09c1c4e217f955c8e3b7e9",
+          "audio_sha256": "8b03e72a188c1d14f017fd74ee40427cabfdcbbb9dfe149c8a5b7cbb6183da05",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 0,
+          "novelty_score": 0.0249732546508312,
+          "selected_threshold": 0.0258292611688375
+        },
+        {
+          "key": "novelsep",
+          "name": "NovelSep",
+          "audio": "assets/audio/eval_scene_airport_0_00154/novelsep.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_0_00154/novelsep.png",
+          "source_sha256": "d1e9a5f0086a48263235d19e4bf65ff8a60e44198bfa89b9a4d9ea0e5643c8de",
+          "audio_sha256": "47c4906a8e3f06271e4462f920ba5a8adf1404bab66e03272c250803bc2ee156",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 0,
+          "novelty_score": 1.3185753822142487e-08,
+          "selected_threshold": 4.967531640431844e-05
+        }
+      ],
+      "attributions": [
+        {
+          "dataset": "TAU Urban Acoustic Scenes 2019",
+          "file": "airport-lyon-1041-43878-a.wav",
+          "creator": "Tampere University and its licensors",
+          "url": "https://zenodo.org/records/2589280",
+          "license": "Experimental and non-commercial use only",
+          "license_url": "licenses/TAU-2019-LICENSE.txt"
+        }
+      ]
+    },
+    {
+      "id": "eval_scene_metro_station_0_00115",
+      "kind": "normal",
+      "scene": "metro_station",
+      "city": "milan",
+      "novel_class": null,
+      "normal_recording": "metro_station-milan-1117-43162-a.wav",
+      "normal_segment": 1,
+      "source_sequence_strategy": null,
+      "duration": 5.0,
+      "playback_gain": 1.0,
+      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "tracks": [
+        {
+          "key": "mixture",
+          "name": "Mixture",
+          "audio": "assets/audio/eval_scene_metro_station_0_00115/mixture.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_0_00115/mixture.png",
+          "source_sha256": "9c41683e33b5b56760debb1762bbc296c0be11f1c7e65cf3127873c29fda857e",
+          "audio_sha256": "99a0ad994e42a712417ed594c2aa8bfcc14f34b2342e42bb7377bd8b845b2abc",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "normal",
+          "name": "Normal reference",
+          "audio": "assets/audio/eval_scene_metro_station_0_00115/normal.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_0_00115/normal.png",
+          "source_sha256": "9c41683e33b5b56760debb1762bbc296c0be11f1c7e65cf3127873c29fda857e",
+          "audio_sha256": "99a0ad994e42a712417ed594c2aa8bfcc14f34b2342e42bb7377bd8b845b2abc",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "novel",
+          "name": "Novel reference",
+          "audio": "assets/audio/eval_scene_metro_station_0_00115/novel.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_0_00115/novel.png",
+          "source_sha256": "4770dd9818390f441d5fdaada17256705ff6ba5cea26e2f06d41c23257a78f93",
+          "audio_sha256": "ec94258bcdeed1d1e185129844ecad8f8fe6b78ee7d4deed649892faa497900f",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "sam_audio",
+          "name": "SAM-Audio",
+          "audio": "assets/audio/eval_scene_metro_station_0_00115/sam_audio.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_0_00115/sam_audio.png",
+          "source_sha256": "3d086733a2489e0324ba8d4cebf46022e2e60ed037a7f17b5aafb4c2294027b0",
+          "audio_sha256": "dee2026a48f46cfb8689907a984610baa3f32b9f7be39392a6361b65ff5d1cd4",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 1,
+          "novelty_score": 0.0307361390441656,
+          "selected_threshold": 1.4266126946438362e-08
+        },
+        {
+          "key": "sam_audio_ft",
+          "name": "SAM-Audio w/ Fine-Tuning",
+          "audio": "assets/audio/eval_scene_metro_station_0_00115/sam_audio_ft.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_0_00115/sam_audio_ft.png",
+          "source_sha256": "b448fbbebcfea5dc0905f3dd2410ab3ff9dd4e8811a481abb810471ca8014c05",
+          "audio_sha256": "b88bc50df452ed5aa5b37235bea468b12879603e8ea93fc4491faa9b8dd5acd9",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 1,
+          "novelty_score": 0.0222124345600605,
+          "selected_threshold": 8.58748535392806e-06
+        },
+        {
+          "key": "nne",
+          "name": "NNE",
+          "audio": "assets/audio/eval_scene_metro_station_0_00115/nne.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_0_00115/nne.png",
+          "source_sha256": "2a311dababbe40a879eac0050e35213a5760f773232f42f3ca4575151e6cdc47",
+          "audio_sha256": "682bd3604dd09c3354b5fd8e4362a7caa04a72325fc118b4293d945d1d1cdaa3",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 0,
+          "novelty_score": 0.0072104455903172,
+          "selected_threshold": 0.0180512554943561
+        },
+        {
+          "key": "novelsep",
+          "name": "NovelSep",
+          "audio": "assets/audio/eval_scene_metro_station_0_00115/novelsep.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_0_00115/novelsep.png",
+          "source_sha256": "fa688bf0afe7ad1b9bc9fe3d01c268124e281e451eb545118ecefd85e4eab5a7",
+          "audio_sha256": "d99327d88a34127d6ff39cdda133438534a8afc0fcb9b55975dd04d5395bfc7c",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 0,
+          "novelty_score": 9.059790251342292e-09,
+          "selected_threshold": 4.6745808504056185e-05
+        }
+      ],
+      "attributions": [
+        {
+          "dataset": "TAU Urban Acoustic Scenes 2019",
+          "file": "metro_station-milan-1117-43162-a.wav",
+          "creator": "Tampere University and its licensors",
+          "url": "https://zenodo.org/records/2589280",
+          "license": "Experimental and non-commercial use only",
+          "license_url": "licenses/TAU-2019-LICENSE.txt"
+        }
+      ]
+    },
+    {
+      "id": "eval_scene_metro_station_0_00121",
+      "kind": "normal",
+      "scene": "metro_station",
+      "city": "prague",
+      "novel_class": null,
+      "normal_recording": "metro_station-prague-1118-43240-a.wav",
+      "normal_segment": 1,
+      "source_sequence_strategy": null,
+      "duration": 5.0,
+      "playback_gain": 1.0,
+      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "tracks": [
+        {
+          "key": "mixture",
+          "name": "Mixture",
+          "audio": "assets/audio/eval_scene_metro_station_0_00121/mixture.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_0_00121/mixture.png",
+          "source_sha256": "87eeb616a0c80abfd6c108649232dc8958b53da442df7f5c8f1bbc8ab7067668",
+          "audio_sha256": "00c807e71ba662ae4edcc1b17768e4380ede39e2f5776c671cadff20e3732884",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "normal",
+          "name": "Normal reference",
+          "audio": "assets/audio/eval_scene_metro_station_0_00121/normal.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_0_00121/normal.png",
+          "source_sha256": "1c3d98ef311272d5754d14ba9dc3c13e824c902bf1227f9ffe6a9bc7601798e6",
+          "audio_sha256": "00c807e71ba662ae4edcc1b17768e4380ede39e2f5776c671cadff20e3732884",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "novel",
+          "name": "Novel reference",
+          "audio": "assets/audio/eval_scene_metro_station_0_00121/novel.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_0_00121/novel.png",
+          "source_sha256": "f9450e23f2cffc8f733719a27b7caef40f6cc8491ee18f418874f5f98b7108d0",
+          "audio_sha256": "4190f6e81bdffa6ff02e0e97be7b94dd5f07ae8e889199144413980d566b7d63",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "sam_audio",
+          "name": "SAM-Audio",
+          "audio": "assets/audio/eval_scene_metro_station_0_00121/sam_audio.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_0_00121/sam_audio.png",
+          "source_sha256": "de180cdedec6e0fdafd7ae3cd57062926f9820b1b487707736d2dbd2002f959c",
+          "audio_sha256": "645b57e031bcba83b11d19ed781b2cc003e292f14a6f2d9c3dfe552d4c3b0fdd",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 1,
+          "novelty_score": 0.0505968295037746,
+          "selected_threshold": 1.4266126946438362e-08
+        },
+        {
+          "key": "sam_audio_ft",
+          "name": "SAM-Audio w/ Fine-Tuning",
+          "audio": "assets/audio/eval_scene_metro_station_0_00121/sam_audio_ft.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_0_00121/sam_audio_ft.png",
+          "source_sha256": "4bb6471f610fc1d388996b7cea409fad2f7fdc436f328d16381ae5c0cdaedfae",
+          "audio_sha256": "06c19d423e8dd17aa4b9427c2d91971eb2bd01395d53d9900acb29084ac0748d",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 1,
+          "novelty_score": 0.0332185477018356,
+          "selected_threshold": 8.58748535392806e-06
+        },
+        {
+          "key": "nne",
+          "name": "NNE",
+          "audio": "assets/audio/eval_scene_metro_station_0_00121/nne.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_0_00121/nne.png",
+          "source_sha256": "8b14706fd665f794d57bee945f8a17090cb692dbb1a02b07d6abdd2fd45fa8d5",
+          "audio_sha256": "061c668542b3488e520744ffd5ea144de661e6ee6b843a6da87af126ff6009aa",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 0,
+          "novelty_score": 0.0063071534968912,
+          "selected_threshold": 0.0180512554943561
+        },
+        {
+          "key": "novelsep",
+          "name": "NovelSep",
+          "audio": "assets/audio/eval_scene_metro_station_0_00121/novelsep.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_0_00121/novelsep.png",
+          "source_sha256": "b934cf5de1fe3edfed6a251e7dbef494ba543a93bff13c0fec845828927e356b",
+          "audio_sha256": "530084e742f06e3282fe2b57662b56440c1e3cf38b166232b17fd75e942bc3b1",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 0,
+          "novelty_score": 1.3560591760608533e-08,
+          "selected_threshold": 4.6745808504056185e-05
+        }
+      ],
+      "attributions": [
+        {
+          "dataset": "TAU Urban Acoustic Scenes 2019",
+          "file": "metro_station-prague-1118-43240-a.wav",
+          "creator": "Tampere University and its licensors",
+          "url": "https://zenodo.org/records/2589280",
+          "license": "Experimental and non-commercial use only",
+          "license_url": "licenses/TAU-2019-LICENSE.txt"
+        }
+      ]
+    },
+    {
+      "id": "eval_scene_public_square_0_00233",
+      "kind": "normal",
+      "scene": "public_square",
+      "city": "barcelona",
+      "novel_class": null,
+      "normal_recording": "public_square-barcelona-107-3061-a.wav",
+      "normal_segment": 1,
+      "source_sequence_strategy": null,
+      "duration": 5.0,
+      "playback_gain": 1.0,
+      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "tracks": [
+        {
+          "key": "mixture",
+          "name": "Mixture",
+          "audio": "assets/audio/eval_scene_public_square_0_00233/mixture.wav",
+          "spectrogram": "assets/audio/eval_scene_public_square_0_00233/mixture.png",
+          "source_sha256": "19ef06617a7963d853500a8232839e92b7ddd18380a4d504e14876d34a6a9b73",
+          "audio_sha256": "d406a994278ac264eb1bb0b015ad49995e74e644b592e4ad11c1bf809986c063",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "normal",
+          "name": "Normal reference",
+          "audio": "assets/audio/eval_scene_public_square_0_00233/normal.wav",
+          "spectrogram": "assets/audio/eval_scene_public_square_0_00233/normal.png",
+          "source_sha256": "19ef06617a7963d853500a8232839e92b7ddd18380a4d504e14876d34a6a9b73",
+          "audio_sha256": "d406a994278ac264eb1bb0b015ad49995e74e644b592e4ad11c1bf809986c063",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "novel",
+          "name": "Novel reference",
+          "audio": "assets/audio/eval_scene_public_square_0_00233/novel.wav",
+          "spectrogram": "assets/audio/eval_scene_public_square_0_00233/novel.png",
+          "source_sha256": "40e116fabeb48f27fa58a4c721f6ec6a459a2fa64f38a2e8eed83264a5dcad75",
+          "audio_sha256": "d286f9de8ee41ed6722440a46c1edb6f1b4b5190738fe1561db4250a5e7b51e5",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": null
+        },
+        {
+          "key": "sam_audio",
+          "name": "SAM-Audio",
+          "audio": "assets/audio/eval_scene_public_square_0_00233/sam_audio.wav",
+          "spectrogram": "assets/audio/eval_scene_public_square_0_00233/sam_audio.png",
+          "source_sha256": "043d769d00a207a324390e9f82ac37d0ed36d31cba1c144ca751eb7c58398cc5",
+          "audio_sha256": "966eda37227d1af64e2efcd9d85e26a97fd98a1e011e0088215955afd25b5c42",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 1,
+          "novelty_score": 0.0305473748594522,
+          "selected_threshold": 1.3935786746799296e-08
+        },
+        {
+          "key": "sam_audio_ft",
+          "name": "SAM-Audio w/ Fine-Tuning",
+          "audio": "assets/audio/eval_scene_public_square_0_00233/sam_audio_ft.wav",
+          "spectrogram": "assets/audio/eval_scene_public_square_0_00233/sam_audio_ft.png",
+          "source_sha256": "4822452fe9928bbe9c35317cfb40e11f45d0e5476c243839fb937894fb3b7693",
+          "audio_sha256": "96b248513e04ec255e722ecedb096aee98d81174061742c6d7c2418e98c9276e",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 1,
+          "novelty_score": 0.0194212961941957,
+          "selected_threshold": 8.639468433102593e-05
+        },
+        {
+          "key": "nne",
+          "name": "NNE",
+          "audio": "assets/audio/eval_scene_public_square_0_00233/nne.wav",
+          "spectrogram": "assets/audio/eval_scene_public_square_0_00233/nne.png",
+          "source_sha256": "d82da9a4d35d850a3c2093d5b8762ad9d337051969cfc8a669a84d501e64bdf0",
+          "audio_sha256": "e1c89ca106ba17c7925d656356262d01ac0b4d492b50f80fefaeaf809c0a82f1",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 1,
+          "novelty_score": 0.0268591344356536,
+          "selected_threshold": 0.0085272565484046
+        },
+        {
+          "key": "novelsep",
+          "name": "NovelSep",
+          "audio": "assets/audio/eval_scene_public_square_0_00233/novelsep.wav",
+          "spectrogram": "assets/audio/eval_scene_public_square_0_00233/novelsep.png",
+          "source_sha256": "7380f079a63c04efa3f97be5e5cd5536376e234bafba4843d9861e79399c6e26",
+          "audio_sha256": "840dfd4c8db0cb21c31ca7f0b3328b99aa8c485b6da16ccf35bd06d61b7f5588",
+          "sample_rate": 16000,
+          "clap": null,
+          "saj": null,
+          "predicted_label": 0,
+          "novelty_score": 1.0985631071491753e-08,
+          "selected_threshold": 3.867344639729709e-05
+        }
+      ],
+      "attributions": [
+        {
+          "dataset": "TAU Urban Acoustic Scenes 2019",
+          "file": "public_square-barcelona-107-3061-a.wav",
+          "creator": "Tampere University and its licensors",
+          "url": "https://zenodo.org/records/2589280",
+          "license": "Experimental and non-commercial use only",
+          "license_url": "licenses/TAU-2019-LICENSE.txt"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NovelSep combines optimization-based separation and deep neural refinement for novelty detection with listenable explanations. Listen to normal and novel sound examples.">
+  <meta property="og:title" content="NovelSep — Novelty Detection with Listenable Explanations">
+  <meta property="og:description" content="Hear the evidence behind a novelty detection decision. Code, model weights, and listening examples.">
+  <meta property="og:image" content="https://kokieto.github.io/NovelSep/assets/architecture.png">
+  <meta name="theme-color" content="#185c53">
+  <link rel="canonical" href="https://kokieto.github.io/NovelSep/">
+  <title>NovelSep: Novelty Detection with Listenable Explanations</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#listening">Skip to listening examples</a>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">The University of Tokyo · Research project</p>
+      <h1><span>NovelSep</span>Bridging Optimization-Based Separation and Deep Neural Refinement for Novelty Detection with Listenable Explanations</h1>
+      <p class="authors"><a href="mailto:shoda@robot.t.u-tokyo.ac.jp">Koki Shoda</a><span>Jun Younes Louhi Kasahara</span><span>Qi An</span><span>Atsushi Yamashita</span></p>
+      <p class="affiliation">The University of Tokyo</p>
+      <nav class="resource-links" aria-label="Project resources">
+        <a href="https://github.com/kokieto/NovelSep">Code <span aria-hidden="true">↗</span></a>
+        <a href="https://huggingface.co/kokieto/NovelSep">Model weights <span aria-hidden="true">↗</span></a>
+        <a class="primary" href="#listening">Listen to examples <span aria-hidden="true">↓</span></a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="overview" aria-labelledby="overview-title">
+      <div class="section-heading">
+        <p class="eyebrow">The idea</p>
+        <h2 id="overview-title">Hear what made a sound novel.</h2>
+      </div>
+      <p class="intro">A novelty score flags a departure from everyday sounds. NovelSep also produces an audio waveform that lets a listener inspect the evidence behind that score. A novel sound is new relative to an environment’s normal sound distribution; novelty does not necessarily indicate danger.</p>
+      <div class="steps">
+        <article><span class="step-number">01</span><h3>Separate</h3><p>Nonnegative Novelty Extraction (NNE) estimates normal and novel components using a dictionary learned from normal recordings.</p></article>
+        <article><span class="step-number">02</span><h3>Refine</h3><p>Flow matching in a pretrained audio latent space refines the initial estimates. Normal Region Exclusion selects surrogate novel audio for adaptation.</p></article>
+        <article><span class="step-number">03</span><h3>Detect and listen</h3><p>The energy of the refined novel component provides a novelty score. The same component can be played back as a listenable explanation.</p></article>
+      </div>
+      <figure class="architecture">
+        <img src="assets/architecture.png" alt="NovelSep pipeline: a mixture enters NNE; the preliminary normal and novel estimates are encoded, refined by flow matching conditioned on the mixture, and decoded into refined estimates." width="2400" height="465">
+        <figcaption>NovelSep initializes neural refinement with the source estimates produced by NNE.</figcaption>
+      </figure>
+    </section>
+    <section id="listening" class="listening" aria-labelledby="listening-title">
+      <div class="section-heading">
+        <p class="eyebrow">Listening room</p>
+        <h2 id="listening-title">From a mixture to audible evidence</h2>
+        <p>Compare four methods on five novel-containing mixtures and five normal-only recordings. All method outputs below are estimates of the <strong>novel component</strong>.</p>
+      </div>
+      <div class="listening-guide">
+        <p><strong>Start with the mixture and references.</strong> Then compare the estimated novel sounds. Successful separation preserves the novel event and suppresses the normal background. A normal-only example should produce a quiet novel estimate.</p>
+        <p>CLAP is audio embedding cosine similarity to the novel reference; SAJ is the automated SAM Audio Judge overall score. Higher is better for both. Scores are undefined for silent normal-only novel references and are shown as N/A.</p>
+      </div>
+      <div class="kind-tabs" role="tablist" aria-label="Example type">
+        <button id="tab-novel" type="button" role="tab" aria-selected="true" aria-controls="example-panel" data-kind="novel">Novel sounds <span>5 examples</span></button>
+        <button id="tab-normal" type="button" role="tab" aria-selected="false" aria-controls="example-panel" tabindex="-1" data-kind="normal">Normal sounds <span>5 examples</span></button>
+      </div>
+      <div id="example-panel" role="tabpanel" aria-labelledby="tab-novel">
+        <div id="sample-picker" class="sample-picker" aria-label="Choose an example"></div>
+        <div id="sample" aria-live="polite"><p class="loading">Loading listening examples…</p></div>
+      </div>
+      <noscript><p>Enable JavaScript to use the listening comparison. All files and their attributions are also available in the <a href="https://github.com/kokieto/NovelSep/tree/main/docs/assets/audio">audio directory</a>.</p></noscript>
+      <div class="comparison-notes">
+        <p><strong>Consistent playback.</strong> No track is normalized independently. A shared attenuation, when needed, keeps every track within an example below full scale and preserves relative amplitudes. Keep the player volume unchanged when comparing methods.</p>
+        <div class="scale-note"><span class="gradient" aria-hidden="true"></span><span>−80 to 0.0 dB · one spectrogram scale per example · 0.0–8.0 kHz</span></div>
+        <p class="small">Spectrogram levels are relative to the maximum magnitude across all reference and estimated tracks in the selected example. Detection labels are the saved predictions from each method’s tuning-selected threshold.</p>
+      </div>
+      <details class="selection-details">
+        <summary>How these examples were selected</summary>
+        <p>Novel examples cover siren, glass break, gun shot, baby cry, and screaming once each. Within each class, the selected example maximizes the positive CLAP difference between NovelSep and SAM-Audio w/ Fine-Tuning among examples with NovelSep CLAP of at least 0.60.</p>
+        <p>Normal examples include two airport recordings, two metro station recordings, and one public square recording, with distinct recordings and different cities within each scene. Among correct NovelSep normal decisions, examples favor a low NovelSep-to-fine-tuned-SAM-Audio residual energy ratio to illustrate suppression.</p>
+        <p>These deliberately selected qualitative examples are not a random sample or an aggregate evaluation. All scores come from saved evaluation outputs. <a href="assets/project-data.json">Download the selection and provenance manifest</a>.</p>
+      </details>
+    </section>
+    <section class="resources" aria-labelledby="resources-title">
+      <div><p class="eyebrow">Use NovelSep</p><h2 id="resources-title">Code and pretrained models</h2><p>The release provides reusable NovelSep and Normal Region Exclusion classes, scene-specific model weights, and reproducible demo selection.</p></div>
+      <div class="resource-cards"><a href="https://github.com/kokieto/NovelSep"><strong>GitHub repository ↗</strong><span>Installation, inference, and module documentation</span></a><a href="https://huggingface.co/kokieto/NovelSep"><strong>Hugging Face model repository ↗</strong><span>Model weights and model card</span></a></div>
+    </section>
+  </main>
+  <footer>
+    <h2>Data and acknowledgments</h2>
+    <p>Normal recordings come from <a href="https://zenodo.org/records/2589280">TAU Urban Acoustic Scenes 2019</a>, by Tampere University and its licensors. Novel events come from <a href="https://github.com/karolpiczak/ESC-50">ESC-50</a>, <a href="https://zenodo.org/records/1160455">TUT Rare Sound Events 2017</a>, and the <a href="https://www.kaggle.com/datasets/whats2000/human-screaming-detection-dataset">Human Screaming Detection Dataset</a>.</p>
+    <p>Audio examples and derived estimates retain the original source terms and are provided for experimental and non-commercial use. Each selected recording is credited below the player. The code license does not cover these audio assets. <a href="licenses/TAU-2019-LICENSE.txt">Full TAU copyright notice</a> · <a href="ATTRIBUTIONS.md">Complete audio attributions and license details</a>.</p>
+    <p class="small">Supported in part by JSPS KAKENHI Grant Numbers JP26KJ0923 and JP26K21348 and WINGS-PES at the University of Tokyo.</p>
+    <p class="footer-line">NovelSep <span>Research project · Koki Shoda and collaborators</span></p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

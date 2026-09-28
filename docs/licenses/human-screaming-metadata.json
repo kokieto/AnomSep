@@ -1,0 +1,9 @@
+{
+  "title": "Human Screaming Detection Dataset",
+  "ownerName": "Ren-Di Wu",
+  "ownerRef": "whats2000",
+  "licenseName": "MIT",
+  "description": "The Human Screaming Detection Dataset is a specialized subset curated from a broader [voice dataset](https://research.google.com/audioset/index.html). This unique collection focuses exclusively on the identification and analysis of human screaming. It comprises two key components:\n\n**Negative Voice Samples**: This part of the dataset includes 2,631 voice samples, each varying in duration from 1 to 10 seconds (Mostly at 10s). These samples are recorded at a high-quality sample rate of 44,100 Hz, ensuring clarity and precision in analysis. These samples do not contain instances of screaming but provide a diverse range of non-screaming vocal sounds to aid in more accurate scream detection.\n\n**Positive Screaming Cases**: A crucial segment of the dataset, this collection features 862 instances of human screaming. Each screaming sample is also captured in the range of 1 to 10 seconds (Mostly at 10s), maintaining a 44,100 Hz sample rate. This segment is pivotal for training models to recognize and differentiate screaming sounds from other types of vocalizations.\n\n**Application**:\nThis dataset is invaluable for developing and training machine learning models in areas such as security systems, healthcare monitoring, and emergency response systems, where the detection of screaming can signify urgent situations requiring immediate attention.\n\n**Format**:\nAll audio samples are uniformly formatted to ensure consistency and ease of use for machine learning applications.",
+  "lastUpdated": "2023-11-30T03:22:44.15Z",
+  "source": "https://www.kaggle.com/api/v1/datasets/view/whats2000/human-screaming-detection-dataset"
+}
