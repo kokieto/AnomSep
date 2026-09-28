@@ -3,7 +3,8 @@
 **NovelSep: Bridging Optimization-Based Separation and Deep Neural Refinement
 for Novelty Detection with Listenable Explanations**
 
-Koki Shoda, Jun Younes Louhi Kasahara, Qi An, and Atsushi Yamashita  
+Koki Shoda, Jun Younes Louhi Kasahara, Qi An, and Atsushi Yamashita
+
 The University of Tokyo
 
 [Project page](https://kokieto.github.io/NovelSep/) ·

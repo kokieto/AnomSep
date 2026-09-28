@@ -80,5 +80,3 @@ def freeze_all_but_lora(model: nn.Module) -> None:
         if isinstance(module, LoRALinear):
             module.lora_a.weight.requires_grad = True
             module.lora_b.weight.requires_grad = True
-
-
