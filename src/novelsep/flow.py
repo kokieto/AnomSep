@@ -195,10 +195,10 @@ class CpuNNENoveltyExtractor:
 
 
 class NNEFlowInitializer:
-    """NNE-initialized Sam-Audio flow matching helper.
+    """NNE-initialized SAM-Audio flow matching helper.
 
     The NNE stage is treated as a non-differentiable initializer.  It estimates
-    normal and novelty waveforms from the mixture, encodes them with Sam-Audio's
+    normal and novelty waveforms from the mixture, encodes them with SAM-Audio's
     DAC-VAE, and uses those latents as h(0) instead of Gaussian noise.
     """
 

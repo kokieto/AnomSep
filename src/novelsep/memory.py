@@ -23,7 +23,7 @@ def strip_unused_prompt_modules(model: object) -> dict[str, Any]:
 
     def prompt_only_video_features(self, video, audio_features):
         if video is not None:
-            raise ValueError("NovelSoundSep SAM-Audio loader does not keep the video encoder.")
+            raise ValueError("NovelSep SAM-Audio loader does not keep the video encoder.")
         batch, frames, _ = audio_features.shape
         return audio_features.new_zeros(
             batch,
