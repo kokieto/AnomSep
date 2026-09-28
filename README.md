@@ -21,6 +21,9 @@ classes, pretrained inference, the flow-matching training loss, NNE dictionary
 learning, and a reproducible project-page builder. The internal experiment
 orchestration and training datasets are not required for inference.
 
+The original source code is available for **noncommercial research only** under
+the [NovelSep Research-Only License](LICENSE).
+
 ## Installation
 
 Use a conda environment with Python 3.11 and a CUDA-compatible PyTorch build.
@@ -185,7 +188,16 @@ dictionary, and geometry bundles. Neither script downloads the training data.
 
 ## License
 
-Original source code is MIT-licensed. SAM-Audio and derived model adapters use
-the SAM License. Audio datasets retain their original terms, including the
-noncommercial terms for TAU recordings. See [THIRD_PARTY.md](THIRD_PARTY.md),
-the [model card](https://huggingface.co/kokieto/NovelSep), and the page credits.
+Original source code and associated documentation use the
+[NovelSep Research-Only License](LICENSE). Noncommercial scientific experiments,
+evaluation, benchmarking, and reproduction of research results are permitted.
+Redistributed code and modifications must retain this license and its notices.
+Commercial use, commercial product or service development, and production
+deployment outside controlled research experiments require separate written
+permission from Koki Shoda. This change does not withdraw permissions already
+granted for earlier copies released under MIT.
+
+SAM-Audio and derived model adapters use the SAM License. Audio datasets retain
+their original terms, including the noncommercial terms for TAU recordings.
+See [THIRD_PARTY.md](THIRD_PARTY.md), the
+[model card](https://huggingface.co/kokieto/NovelSep), and the page credits.

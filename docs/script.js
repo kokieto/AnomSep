@@ -84,11 +84,6 @@ function renderSample(sample) {
   text.append(element("h3", "", sample.kind === "novel" ? `${labels[sample.novel_class]} in ${labels[sample.scene].toLowerCase()}` : `${labels[sample.scene]} · normal only`));
   text.append(element("p", "", `${titleCase(sample.city)} · ${formatScore(sample.duration)} s · ${sample.kind === "novel" ? "Novel sound present" : "No novel sound present"}`));
   header.append(text);
-  if (sample.kind === "novel") {
-    const badge = element("div", "gap-badge");
-    badge.append(element("strong", "", `+${formatScore(sample.clap_gap)}`), document.createTextNode("NovelSep − SAM-Audio w/ Fine-Tuning CLAP"));
-    header.append(badge);
-  }
   container.append(header, element("p", "track-label", "Reference audio"));
   const references = element("div", "tracks reference-tracks");
   sample.tracks.slice(0, 3).forEach(track => references.append(trackCard(track, sample, true)));

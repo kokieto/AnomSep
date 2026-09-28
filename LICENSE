@@ -1,16 +1,53 @@
-MIT License
+NovelSep Research-Only License
+Version 1.0
+SPDX-License-Identifier: LicenseRef-NovelSep-Research-Only
 
 Copyright (c) 2026 Koki Shoda
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. Scope
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+This license applies to the original NovelSep source code and associated
+documentation distributed with this license (the "Software"). Third-party
+software, models, model derivatives, audio recordings, and dataset material
+remain subject to their respective licenses. This license grants no additional
+rights to those materials. See THIRD_PARTY.md and docs/ATTRIBUTIONS.md.
+
+2. Permitted research use
+
+"Research Use" means noncommercial academic or scientific investigation,
+including experiments, evaluation, benchmarking, reproduction of research
+results, and preparation of scholarly publications. Controlled experiments
+conducted for these purposes are permitted, including experiments outside a
+laboratory. Eligibility depends on the activity, not the user's affiliation.
+
+Subject to the conditions below, permission is granted, free of charge, to
+use, copy, and modify the Software solely for Research Use, and to redistribute
+the Software, including modifications, solely under this license.
+
+3. Restrictions and redistribution
+
+a. Commercial use, sale, paid services, development or improvement of commercial
+   products or services, and ordinary business operations are not permitted.
+b. Production or operational deployment is not permitted, except for controlled
+   experiments that meet the definition of Research Use.
+c. All copies and redistributions of the Software or substantial portions of
+   it must include this license and the copyright notice. Modifications must
+   be clearly identified, and recipients must receive the Software and its
+   modifications subject to the same permissions and restrictions.
+d. No permission is granted to sublicense or distribute the Software under
+   different terms. These conditions apply to the Software and modifications
+   to it; they do not require research papers or unrelated works to use this
+   license.
+e. Any use outside these permissions requires prior written permission from
+   the copyright holder. Contact: shoda@robot.t.u-tokyo.ac.jp.
+
+4. Earlier releases
+
+This license applies to copies distributed under it. It does not withdraw or
+alter permissions already granted for earlier copies released under the MIT
+License.
+
+5. Disclaimer of warranty and limitation of liability
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -19,7 +56,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-This license covers the original NovelSep source code. Third-party models,
-model derivatives, audio recordings, and dataset material are governed by
-their respective licenses; see THIRD_PARTY.md and docs/ATTRIBUTIONS.md.

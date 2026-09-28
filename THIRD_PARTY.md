@@ -1,5 +1,9 @@
 # Third-party components
 
+The [NovelSep Research-Only License](LICENSE) covers original NovelSep source
+code and associated documentation. It does not replace or modify the terms
+for the third-party components and assets listed below.
+
 - [SAM-Audio](https://github.com/facebookresearch/sam-audio) by Meta supplies the
   pretrained VAE, transformer, and inference backend. SAM-Audio and derivative
   model adapters are subject to the [SAM License](LICENSES/SAM-Audio.txt).
