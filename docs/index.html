@@ -46,7 +46,7 @@
     <section id="listening" class="listening" aria-labelledby="listening-title">
       <div class="section-heading">
         <p class="eyebrow">Listening room</p>
-        <h2 id="listening-title">From a mixture to audible evidence</h2>
+        <h2 id="listening-title">From a mixture to listenable explanations</h2>
         <p>Compare four methods on five novel-containing mixtures and five normal-only recordings. All method outputs below are estimates of the <strong>novel component</strong>.</p>
       </div>
       <div class="listening-guide">
@@ -67,12 +67,6 @@
         <div class="scale-note"><span class="gradient" aria-hidden="true"></span><span>−80 to 0.0 dB · one spectrogram scale per example · 0.0–8.0 kHz</span></div>
         <p class="small">Spectrogram levels are relative to the maximum magnitude across all reference and estimated tracks in the selected example. Detection labels are the saved predictions from each method’s tuning-selected threshold.</p>
       </div>
-      <details class="selection-details">
-        <summary>How these examples were selected</summary>
-        <p>Novel examples cover siren, glass break, gun shot, baby cry, and screaming once each. Within each class, the selected example maximizes the positive CLAP difference between NovelSep and SAM-Audio w/ Fine-Tuning among examples with NovelSep CLAP of at least 0.60.</p>
-        <p>Normal examples include two airport recordings, two metro station recordings, and one public square recording, with distinct recordings and different cities within each scene. Among correct NovelSep normal decisions, examples favor a low NovelSep-to-fine-tuned-SAM-Audio residual energy ratio to illustrate suppression.</p>
-        <p>These deliberately selected qualitative examples are not a random sample or an aggregate evaluation. All scores come from saved evaluation outputs. <a href="assets/project-data.json">Download the selection and provenance manifest</a>.</p>
-      </details>
     </section>
     <section class="resources" aria-labelledby="resources-title">
       <div><p class="eyebrow">Use NovelSep</p><h2 id="resources-title">Code and pretrained models</h2><p>The release provides reusable NovelSep and Normal Region Exclusion classes, scene-specific model weights, and reproducible demo selection.</p><p>Original source code is available for noncommercial research only. See the <a href="https://github.com/kokieto/NovelSep/blob/main/LICENSE">LICENSE</a>.</p></div>

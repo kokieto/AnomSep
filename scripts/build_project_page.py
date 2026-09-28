@@ -50,7 +50,7 @@ def download_once(url, destination):
 
 
 def select_samples(rows, metrics):
-    """One maximum positive CLAP-gap example per class; balanced normal scenes."""
+    """One example per class with a large CLAP gain over both comparison methods."""
     grouped = {}
     for row in rows:
         if row["method"] in {m[0] for m in METHODS}:
@@ -66,12 +66,16 @@ def select_samples(rows, metrics):
             if not all(sid in metrics[method] for method, _, _ in METHODS):
                 continue
             ours = float(metrics["NovelSoundSep"][sid]["clap_audio_cosine"])
-            baseline = float(metrics["Sam-Audio_FT"][sid]["clap_audio_cosine"])
-            if math.isfinite(ours) and math.isfinite(baseline) and ours >= CLAP_QUALITY_FLOOR and ours > baseline:
-                candidates.append((ours - baseline, ours, sid))
+            fine_tuned = float(metrics["Sam-Audio_FT"][sid]["clap_audio_cosine"])
+            nne = float(metrics["NNE"][sid]["clap_audio_cosine"])
+            if (all(math.isfinite(value) for value in (ours, fine_tuned, nne))
+                    and ours >= CLAP_QUALITY_FLOOR and ours > fine_tuned and ours > nne):
+                gap_ft = ours - fine_tuned
+                gap_nne = ours - nne
+                candidates.append((min(gap_ft, gap_nne), gap_ft, ours, sid))
         if not candidates:
             raise ValueError(f"No eligible novel example for {novel_class}")
-        _, _, sid = max(candidates)
+        _, _, _, sid = max(candidates)
         selections.append(grouped[sid])
     used_recordings = set()
     for scene, count in NORMAL_SCENE_COUNTS.items():
@@ -272,7 +276,7 @@ def main():
     samples = [export_sample(rows, metrics, args.output, esc_license, kaggle) for rows in selections]
     data = {"version": 1, "experiment": root.name,
             "selection_policy": {
-                "novel": "One example per class. Among examples with NovelSep CLAP >= 0.60 and a positive gap, maximize NovelSep minus SAM-Audio w/ Fine-Tuning CLAP; break ties by NovelSep CLAP, then sample ID.",
+                "novel": f"One example per class. Require NovelSep CLAP >= {CLAP_QUALITY_FLOOR:.2f} and strictly higher CLAP than both NNE and SAM-Audio w/ Fine-Tuning. Maximize the smaller of the two CLAP gains; break ties by the gain over SAM-Audio w/ Fine-Tuning, then NovelSep CLAP, then sample ID, all in descending order.",
                 "normal": "Two airport, two metro station, and one public square examples. Select correct NovelSep normal decisions with the smallest NovelSep/FT saved novelty-score ratio; use distinct source recordings and cities within each scene.",
                 "scope": "Qualitative, deliberately selected examples; not a random sample or an aggregate evaluation."},
             "export": {"audio": "32-bit FLOAT WAV; one shared attenuation per example; no independent normalization",

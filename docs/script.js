@@ -82,7 +82,8 @@ function renderSample(sample) {
   const header = element("div", "sample-header");
   const text = element("div");
   text.append(element("h3", "", sample.kind === "novel" ? `${labels[sample.novel_class]} in ${labels[sample.scene].toLowerCase()}` : `${labels[sample.scene]} · normal only`));
-  text.append(element("p", "", `${titleCase(sample.city)} · ${formatScore(sample.duration)} s · ${sample.kind === "novel" ? "Novel sound present" : "No novel sound present"}`));
+  const location = sample.kind === "novel" ? `${titleCase(sample.city)} · ` : "";
+  text.append(element("p", "", `${location}${formatScore(sample.duration)} s · ${sample.kind === "novel" ? "Novel sound present" : "No novel sound present"}`));
   header.append(text);
   container.append(header, element("p", "track-label", "Reference audio"));
   const references = element("div", "tracks reference-tracks");
@@ -102,7 +103,7 @@ function render() {
     button.type = "button";
     button.setAttribute("aria-pressed", String(index === state.selected[state.kind]));
     button.append(element("strong", "", state.kind === "novel" ? labels[sample.novel_class] : labels[sample.scene]));
-    button.append(element("span", "", state.kind === "novel" ? labels[sample.scene] : titleCase(sample.city)));
+    button.append(element("span", "", state.kind === "novel" ? labels[sample.scene] : `Example ${index + 1}`));
     button.addEventListener("click", () => {
       state.selected[state.kind] = index;
       render();

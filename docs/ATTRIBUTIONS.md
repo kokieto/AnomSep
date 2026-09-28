@@ -6,32 +6,33 @@ Audio sources were cropped, resampled, normalized, mixed, and separated by the e
 
 The Human Screaming Detection Dataset is attributed to Ren-Di Wu (whats2000); its Kaggle metadata declares MIT. The uploader describes the dataset as curated from AudioSet. The recorded declaration is included in [human-screaming-metadata.json](licenses/human-screaming-metadata.json); it does not independently establish the license of the original online video.
 
-## eval_scene_metro_station_1_00155
+## eval_scene_airport_1_00575
 
-- `metro_station-lyon-1010-43972-a.wav` — TAU Urban Acoustic Scenes 2019;  by Tampere University and its licensors. [Source](https://zenodo.org/records/2589280); [Experimental and non-commercial use only](licenses/TAU-2019-LICENSE.txt).
-- `5-117118-A-42.wav` — ESC-50; siren_low.wav by UncleSigmund. [Source](https://www.freesound.org/people/UncleSigmund/sounds/117118/); [CC0 source; ESC-50 dataset CC BY-NC 3.0](licenses/ESC-50-LICENSE.txt).
+- `airport-vienna-209-6371-a.wav` — TAU Urban Acoustic Scenes 2019;  by Tampere University and its licensors. [Source](https://zenodo.org/records/2589280); [Experimental and non-commercial use only](licenses/TAU-2019-LICENSE.txt).
+- `2-70938-A-42.wav` — ESC-50; police2.wav by guitarguy1985. [Source](https://www.freesound.org/people/guitarguy1985/sounds/70938/); [CC0 source; ESC-50 dataset CC BY-NC 3.0](licenses/ESC-50-LICENSE.txt).
 
-## eval_scene_airport_1_00319
+## eval_scene_airport_1_00302
 
-- `airport-london-5-233-a.wav` — TAU Urban Acoustic Scenes 2019;  by Tampere University and its licensors. [Source](https://zenodo.org/records/2589280); [Experimental and non-commercial use only](licenses/TAU-2019-LICENSE.txt).
-- `216299.wav` — TUT Rare Sound Events 2017; Breaking_Glass_08.wav by RSilveira_88. [Source](https://www.freesound.org/people/RSilveira_88/sounds/216299/); [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
-- `164054.wav` — TUT Rare Sound Events 2017; GLASS CRASH.wav by else_fucker. [Source](https://www.freesound.org/people/else_fucker/sounds/164054/); [CC BY-NC 3.0](https://creativecommons.org/licenses/by-nc/3.0/).
+- `airport-helsinki-4-184-a.wav` — TAU Urban Acoustic Scenes 2019;  by Tampere University and its licensors. [Source](https://zenodo.org/records/2589280); [Experimental and non-commercial use only](licenses/TAU-2019-LICENSE.txt).
+- `216286.wav` — TUT Rare Sound Events 2017; Breaking_Glass_16.wav by RSilveira_88. [Source](https://www.freesound.org/people/RSilveira_88/sounds/216286/); [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
+- `148074.wav` — TUT Rare Sound Events 2017; LIGHTBULB SMASH 002.wav by sandyrb. [Source](https://www.freesound.org/people/sandyrb/sounds/148074/); [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
+- `98650.wav` — TUT Rare Sound Events 2017; beer bottle break 2.wav by Tomlija. [Source](https://www.freesound.org/people/Tomlija/sounds/98650/); [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
 
-## eval_scene_airport_1_00337
+## eval_scene_airport_1_00184
 
-- `airport-london-6-262-a.wav` — TAU Urban Acoustic Scenes 2019;  by Tampere University and its licensors. [Source](https://zenodo.org/records/2589280); [Experimental and non-commercial use only](licenses/TAU-2019-LICENSE.txt).
-- `174289.wav` — TUT Rare Sound Events 2017; REC_1_H4NFAR_STR.wav by ingudios. [Source](https://www.freesound.org/people/ingudios/sounds/174289/); [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
+- `airport-lyon-1169-44434-a.wav` — TAU Urban Acoustic Scenes 2019;  by Tampere University and its licensors. [Source](https://zenodo.org/records/2589280); [Experimental and non-commercial use only](licenses/TAU-2019-LICENSE.txt).
+- `209554.wav` — TUT Rare Sound Events 2017; gun-gunshot-02.wav by mdl_03. [Source](https://www.freesound.org/people/mdl_03/sounds/209554/); [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
+- `174287.wav` — TUT Rare Sound Events 2017; REC_1_ME66_STR.wav by ingudios. [Source](https://www.freesound.org/people/ingudios/sounds/174287/); [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
 
-## eval_scene_metro_station_1_00254
+## eval_scene_metro_station_1_00299
 
-- `metro_station-barcelona-63-1889-a.wav` — TAU Urban Acoustic Scenes 2019;  by Tampere University and its licensors. [Source](https://zenodo.org/records/2589280); [Experimental and non-commercial use only](licenses/TAU-2019-LICENSE.txt).
-- `50665.wav` — TUT Rare Sound Events 2017; toddler cry 1 0803xx.wav by BoilingSand. [Source](https://www.freesound.org/people/BoilingSand/sounds/50665/); [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
-- `33670.wav` — TUT Rare Sound Events 2017; baby_crying_2.wav by reinsamba. [Source](https://www.freesound.org/people/reinsamba/sounds/33670/); [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
+- `metro_station-helsinki-67-1995-a.wav` — TAU Urban Acoustic Scenes 2019;  by Tampere University and its licensors. [Source](https://zenodo.org/records/2589280); [Experimental and non-commercial use only](licenses/TAU-2019-LICENSE.txt).
+- `71193.wav` — TUT Rare Sound Events 2017; 01014 baby girl crying 6.wav by Robinhood76. [Source](https://www.freesound.org/people/Robinhood76/sounds/71193/); [CC BY-NC 3.0](https://creativecommons.org/licenses/by-nc/3.0/).
 
-## eval_scene_public_square_1_00499
+## eval_scene_metro_station_1_00522
 
-- `public_square-helsinki-249-7441-a.wav` — TAU Urban Acoustic Scenes 2019;  by Tampere University and its licensors. [Source](https://zenodo.org/records/2589280); [Experimental and non-commercial use only](licenses/TAU-2019-LICENSE.txt).
-- `ZHrf_y9q96Q_out.wav` — Human Screaming Detection Dataset;  by Ren-Di Wu (whats2000). [Source](https://www.kaggle.com/datasets/whats2000/human-screaming-detection-dataset); [MIT (as declared by the dataset uploader)](licenses/human-screaming-metadata.json).
+- `metro_station-london-233-6995-a.wav` — TAU Urban Acoustic Scenes 2019;  by Tampere University and its licensors. [Source](https://zenodo.org/records/2589280); [Experimental and non-commercial use only](licenses/TAU-2019-LICENSE.txt).
+- `XFt8Mi6FGRA_out.wav` — Human Screaming Detection Dataset;  by Ren-Di Wu (whats2000). [Source](https://www.kaggle.com/datasets/whats2000/human-screaming-detection-dataset); [MIT (as declared by the dataset uploader)](licenses/human-screaming-metadata.json).
 
 ## eval_scene_airport_0_00295
 

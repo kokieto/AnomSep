@@ -44,6 +44,7 @@ def test_demo_coverage_and_integrity():
             assert abs(len(waveform) / rate - sample["duration"]) <= 1 / rate
         if sample["kind"] == "novel":
             assert sample["tracks"][-1]["clap"] >= 0.60
+            assert sample["tracks"][-1]["clap"] > sample["tracks"][5]["clap"]
             assert np.isclose(sample["clap_gap"], sample["tracks"][-1]["clap"] - sample["tracks"][4]["clap"])
             assert sample["clap_gap"] > 0
         else:
