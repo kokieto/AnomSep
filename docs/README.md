@@ -61,7 +61,7 @@ strings. All sources in a concatenated sequence are credited.
 
 ## Export contract
 
-- Novel examples: one per class, with AnomSep CLAP at least 0.60 and strictly
+- Anomalous examples: one per class, with AnomSep CLAP at least 0.60 and strictly
   higher than both NNE and SAM-Audio w/ Fine-Tuning. Maximize the smaller of
   the two CLAP gains so both comparisons show an improvement. Break ties by
   the gain over SAM-Audio w/ Fine-Tuning, then AnomSep CLAP, then sample ID,
@@ -69,8 +69,8 @@ strings. All sources in a concatenated sequence are credited.
 - Normal examples: two airport, two metro station, and one public square example;
   distinct recordings and cities within each scene; correct AnomSep normal
   predictions, ordered by the saved AnomSep/FT residual-energy ratio.
-- Seven tracks per example: mixture, normal reference, novel reference, and the
-  four methods' estimated novel components.
+- Seven tracks per example: mixture, normal reference, anomalous reference, and the
+  four methods' estimated anomalous components.
 - FLOAT WAV preserves amplitudes. A single shared attenuation applies only when
   at least one original track exceeds full scale. No independent normalization.
 - Every spectrogram within one example shares its magnitude reference and

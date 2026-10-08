@@ -3,7 +3,7 @@
   "experiment": "NovelSoundSep_v19",
   "selection_policy": {
     "novel": "One example per class. Require AnomSep CLAP >= 0.60 and strictly higher CLAP than both NNE and SAM-Audio w/ Fine-Tuning. Maximize the smaller of the two CLAP gains; break ties by the gain over SAM-Audio w/ Fine-Tuning, then AnomSep CLAP, then sample ID, all in descending order.",
-    "normal": "Two airport, two metro station, and one public square examples. Select correct AnomSep normal decisions with the smallest AnomSep/FT saved novelty-score ratio; use distinct source recordings and cities within each scene.",
+    "normal": "Two airport, two metro station, and one public square examples. Select correct AnomSep normal decisions with the smallest AnomSep/FT saved anomaly-score ratio; use distinct source recordings and cities within each scene.",
     "scope": "Qualitative, deliberately selected examples; not a random sample or an aggregate evaluation."
   },
   "export": {
@@ -80,7 +80,7 @@
         },
         {
           "key": "novel",
-          "name": "Novel reference",
+          "name": "Anomalous reference",
           "audio": "assets/audio/eval_scene_airport_1_00575/novel.wav",
           "spectrogram": "assets/audio/eval_scene_airport_1_00575/novel.png",
           "source_sha256": "2d69c4568c9af7ad7627c2ad786177e6ab9049aebc26fe5154ea1f263ca05e24",
@@ -208,7 +208,7 @@
         },
         {
           "key": "novel",
-          "name": "Novel reference",
+          "name": "Anomalous reference",
           "audio": "assets/audio/eval_scene_airport_1_00302/novel.wav",
           "spectrogram": "assets/audio/eval_scene_airport_1_00302/novel.png",
           "source_sha256": "45e61e09487b4121240da3c86be2ef9083f4a0da72ba078cc7e7758ee1c7abab",
@@ -357,7 +357,7 @@
         },
         {
           "key": "novel",
-          "name": "Novel reference",
+          "name": "Anomalous reference",
           "audio": "assets/audio/eval_scene_airport_1_00184/novel.wav",
           "spectrogram": "assets/audio/eval_scene_airport_1_00184/novel.png",
           "source_sha256": "a70c12592f0008e14fd07c61268ac82abd5dee92839a690e7c8c9d7cf9504a45",
@@ -496,7 +496,7 @@
         },
         {
           "key": "novel",
-          "name": "Novel reference",
+          "name": "Anomalous reference",
           "audio": "assets/audio/eval_scene_metro_station_1_00299/novel.wav",
           "spectrogram": "assets/audio/eval_scene_metro_station_1_00299/novel.png",
           "source_sha256": "7b6b7bb2475b80d5480abe15d1d58a7380c17336e94fff49fc283df5dfb5cd4b",
@@ -625,7 +625,7 @@
         },
         {
           "key": "novel",
-          "name": "Novel reference",
+          "name": "Anomalous reference",
           "audio": "assets/audio/eval_scene_metro_station_1_00522/novel.wav",
           "spectrogram": "assets/audio/eval_scene_metro_station_1_00522/novel.png",
           "source_sha256": "ca48c802544f7798971b1223631c3fb5072e243f51c77c3c0393ac12e6cbbf95",
@@ -753,7 +753,7 @@
         },
         {
           "key": "novel",
-          "name": "Novel reference",
+          "name": "Anomalous reference",
           "audio": "assets/audio/eval_scene_airport_0_00295/novel.wav",
           "spectrogram": "assets/audio/eval_scene_airport_0_00295/novel.png",
           "source_sha256": "29657294de1215c413a7fd02c999d18e54507f7d252ec241d9418a42eed44f94",
@@ -870,7 +870,7 @@
         },
         {
           "key": "novel",
-          "name": "Novel reference",
+          "name": "Anomalous reference",
           "audio": "assets/audio/eval_scene_airport_0_00154/novel.wav",
           "spectrogram": "assets/audio/eval_scene_airport_0_00154/novel.png",
           "source_sha256": "c48df568fc8c6222453005eca2ec65d15f3223d225548da3e4071ab24109a65f",
@@ -987,7 +987,7 @@
         },
         {
           "key": "novel",
-          "name": "Novel reference",
+          "name": "Anomalous reference",
           "audio": "assets/audio/eval_scene_metro_station_0_00115/novel.wav",
           "spectrogram": "assets/audio/eval_scene_metro_station_0_00115/novel.png",
           "source_sha256": "4770dd9818390f441d5fdaada17256705ff6ba5cea26e2f06d41c23257a78f93",
@@ -1104,7 +1104,7 @@
         },
         {
           "key": "novel",
-          "name": "Novel reference",
+          "name": "Anomalous reference",
           "audio": "assets/audio/eval_scene_metro_station_0_00121/novel.wav",
           "spectrogram": "assets/audio/eval_scene_metro_station_0_00121/novel.png",
           "source_sha256": "f9450e23f2cffc8f733719a27b7caef40f6cc8491ee18f418874f5f98b7108d0",
@@ -1221,7 +1221,7 @@
         },
         {
           "key": "novel",
-          "name": "Novel reference",
+          "name": "Anomalous reference",
           "audio": "assets/audio/eval_scene_public_square_0_00233/novel.wav",
           "spectrogram": "assets/audio/eval_scene_public_square_0_00233/novel.png",
           "source_sha256": "40e116fabeb48f27fa58a4c721f6ec6a459a2fa64f38a2e8eed83264a5dcad75",

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="AnomSep combines optimization-based separation and deep neural refinement for anomaly detection with listenable explanations. Listen to normal and novel sound examples.">
+  <meta name="description" content="AnomSep combines optimization-based separation and deep neural refinement for anomaly detection with listenable explanations. Listen to normal and anomalous sound examples.">
   <meta property="og:title" content="AnomSep: Bridging Optimization-Based Separation and Deep Neural Refinement for Anomaly Detection with Listenable Explanations">
   <meta property="og:description" content="Hear the evidence behind an anomaly detection decision. Code, model weights, and listening examples.">
   <meta property="og:image" content="https://kokieto.github.io/AnomSep/assets/architecture.png?v=a99f5c93">
@@ -30,13 +30,13 @@
     <section class="overview" aria-labelledby="overview-title">
       <div class="section-heading">
         <p class="eyebrow">The idea</p>
-        <h2 id="overview-title">Hear what made a sound novel.</h2>
+        <h2 id="overview-title">Hear the sound behind an anomaly score.</h2>
       </div>
-      <p class="intro">A novelty score flags a departure from everyday sounds. AnomSep also produces an audio waveform that lets a listener inspect the evidence behind that score. A novel sound is new relative to an environment’s normal sound distribution; novelty does not necessarily indicate danger.</p>
+      <p class="intro">An anomaly score flags a departure from everyday sounds. AnomSep also produces an audio waveform that lets a listener inspect the evidence behind that score. An anomalous sound deviates from an environment’s normal sound distribution; an anomaly does not necessarily indicate danger.</p>
       <div class="steps">
-        <article><span class="step-number">01</span><h3>Separate</h3><p>Nonnegative Novelty Extraction (NNE) estimates normal and novel components using a dictionary learned from normal recordings.</p></article>
-        <article><span class="step-number">02</span><h3>Refine</h3><p>Flow matching in a pretrained audio latent space refines the initial estimates. Normal Region Exclusion selects surrogate novel audio for adaptation.</p></article>
-        <article><span class="step-number">03</span><h3>Detect and listen</h3><p>The energy of the refined novel component provides a novelty score. The same component can be played back as a listenable explanation.</p></article>
+        <article><span class="step-number">01</span><h3>Separate</h3><p>Nonnegative Novelty Extraction (NNE) estimates normal and anomalous components using a dictionary learned from normal recordings.</p></article>
+        <article><span class="step-number">02</span><h3>Refine</h3><p>Flow matching in a pretrained audio latent space refines the initial estimates. Normal Region Exclusion selects surrogate anomalous audio for adaptation.</p></article>
+        <article><span class="step-number">03</span><h3>Detect and listen</h3><p>The energy of the refined anomalous component provides an anomaly score. The same component can be played back as a listenable explanation.</p></article>
       </div>
       <figure class="architecture">
         <img src="assets/architecture.png?v=a99f5c93" alt="AnomSep pipeline: a mixture enters NNE; the preliminary normal-sound and anomalous-sound estimates are encoded, refined by flow matching conditioned on the mixture, and decoded into refined estimates." width="2400" height="466">
@@ -47,14 +47,14 @@
       <div class="section-heading">
         <p class="eyebrow">Listening room</p>
         <h2 id="listening-title">From a mixture to listenable explanations</h2>
-        <p>Compare four methods on five novel-containing mixtures and five normal-only recordings. All method outputs below are estimates of the <strong>novel component</strong>.</p>
+        <p>Compare four methods on five mixtures containing anomalous sounds and five normal-only recordings. All method outputs below are estimates of the <strong>anomalous component</strong>.</p>
       </div>
       <div class="listening-guide">
-        <p><strong>Start with the mixture and references.</strong> Then compare the estimated novel sounds. Successful separation preserves the novel event and suppresses the normal background. A normal-only example should produce a quiet novel estimate.</p>
-        <p>CLAP is audio embedding cosine similarity to the novel reference; SAJ is the automated SAM Audio Judge overall score. Higher is better for both. Scores are undefined for silent normal-only novel references and are shown as N/A.</p>
+        <p><strong>Start with the mixture and references.</strong> Then compare the estimated anomalous sounds. Successful separation preserves the anomalous event and suppresses the normal background. A normal-only example should produce a quiet anomalous-sound estimate.</p>
+        <p>CLAP is audio embedding cosine similarity to the anomalous reference; SAJ is the automated SAM Audio Judge overall score. Higher is better for both. Scores are undefined for silent anomalous references in normal-only examples and are shown as N/A.</p>
       </div>
       <div class="kind-tabs" role="tablist" aria-label="Example type">
-        <button id="tab-novel" type="button" role="tab" aria-selected="true" aria-controls="example-panel" data-kind="novel">Novel sounds <span>5 examples</span></button>
+        <button id="tab-novel" type="button" role="tab" aria-selected="true" aria-controls="example-panel" data-kind="novel">Anomalous sounds <span>5 examples</span></button>
         <button id="tab-normal" type="button" role="tab" aria-selected="false" aria-controls="example-panel" tabindex="-1" data-kind="normal">Normal sounds <span>5 examples</span></button>
       </div>
       <div id="example-panel" role="tabpanel" aria-labelledby="tab-novel">
@@ -75,11 +75,11 @@
   </main>
   <footer>
     <h2>Data and acknowledgments</h2>
-    <p>Normal recordings come from <a href="https://zenodo.org/records/2589280">TAU Urban Acoustic Scenes 2019</a>, by Tampere University and its licensors. Novel events come from <a href="https://github.com/karolpiczak/ESC-50">ESC-50</a>, <a href="https://zenodo.org/records/1160455">TUT Rare Sound Events 2017</a>, and the <a href="https://www.kaggle.com/datasets/whats2000/human-screaming-detection-dataset">Human Screaming Detection Dataset</a>.</p>
+    <p>Normal recordings come from <a href="https://zenodo.org/records/2589280">TAU Urban Acoustic Scenes 2019</a>, by Tampere University and its licensors. Anomalous events come from <a href="https://github.com/karolpiczak/ESC-50">ESC-50</a>, <a href="https://zenodo.org/records/1160455">TUT Rare Sound Events 2017</a>, and the <a href="https://www.kaggle.com/datasets/whats2000/human-screaming-detection-dataset">Human Screaming Detection Dataset</a>.</p>
     <p>Audio examples and derived estimates retain the original source terms and are provided for experimental and non-commercial use. Each selected recording is credited below the player. The code license does not cover these audio assets. <a href="licenses/TAU-2019-LICENSE.txt">Full TAU copyright notice</a> · <a href="ATTRIBUTIONS.md">Complete audio attributions and license details</a>.</p>
     <p class="small">Supported in part by JSPS KAKENHI Grant Numbers JP26KJ0923 and JP26K21348 and WINGS-PES at the University of Tokyo.</p>
     <p class="footer-line">AnomSep <span>Research project · Koki Shoda and collaborators</span></p>
   </footer>
-  <script src="script.js"></script>
+  <script src="script.js?v=f5c51f07"></script>
 </body>
 </html>

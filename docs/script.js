@@ -22,7 +22,7 @@ function trackCard(track, sample, reference) {
   const card = element("article", `track${track.key === "anomsep" ? " ours" : ""}`);
   const header = element("div", "track-header");
   const heading = element("h4", "", track.name);
-  if (!reference) heading.append(element("span", "component", "Estimated novel component"));
+  if (!reference) heading.append(element("span", "component", "Estimated anomalous component"));
   header.append(heading);
   const spec = element("div", "spec");
   const img = element("img");
@@ -43,7 +43,7 @@ function trackCard(track, sample, reference) {
   });
   card.append(header, spec, audio);
   if (reference) {
-    const notes = {mixture: "Input to every method", normal: "Ground-truth normal component", novel: sample.kind === "normal" ? "Ground truth: silence" : "Ground-truth novel component"};
+    const notes = {mixture: "Input to every method", normal: "Ground-truth normal component", novel: sample.kind === "normal" ? "Ground truth: silence" : "Ground-truth anomalous component"};
     card.append(element("div", "reference-note", notes[track.key]));
   } else {
     const metrics = element("div", "metrics");
@@ -54,7 +54,7 @@ function trackCard(track, sample, reference) {
     }
     const correct = track.predicted_label === (sample.kind === "novel" ? 1 : 0);
     const decision = element("div", `decision${correct ? "" : " incorrect"}`, "Detection: ");
-    decision.append(element("span", "", track.predicted_label === 1 ? "Novel" : "Normal"), document.createTextNode(correct ? " · correct" : " · incorrect"));
+    decision.append(element("span", "", track.predicted_label === 1 ? "Anomalous" : "Normal"), document.createTextNode(correct ? " · correct" : " · incorrect"));
     card.append(metrics, decision);
   }
   return card;
@@ -83,12 +83,12 @@ function renderSample(sample) {
   const text = element("div");
   text.append(element("h3", "", sample.kind === "novel" ? `${labels[sample.novel_class]} in ${labels[sample.scene].toLowerCase()}` : `${labels[sample.scene]} · normal only`));
   const location = sample.kind === "novel" ? `${titleCase(sample.city)} · ` : "";
-  text.append(element("p", "", `${location}${formatScore(sample.duration)} s · ${sample.kind === "novel" ? "Novel sound present" : "No novel sound present"}`));
+  text.append(element("p", "", `${location}${formatScore(sample.duration)} s · ${sample.kind === "novel" ? "Anomalous sound present" : "No anomalous sound present"}`));
   header.append(text);
   container.append(header, element("p", "track-label", "Reference audio"));
   const references = element("div", "tracks reference-tracks");
   sample.tracks.slice(0, 3).forEach(track => references.append(trackCard(track, sample, true)));
-  container.append(references, element("p", "track-label", "Estimated novel sounds"));
+  container.append(references, element("p", "track-label", "Estimated anomalous sounds"));
   const methods = element("div", "tracks method-tracks");
   sample.tracks.slice(3).forEach(track => methods.append(trackCard(track, sample, false)));
   container.append(methods, renderCredits(sample));
@@ -132,7 +132,7 @@ document.querySelectorAll("[data-kind]").forEach(button => {
   });
 });
 
-fetch("assets/project-data.json").then(response => {
+fetch("assets/project-data.json?v=9eff4d5d").then(response => {
   if (!response.ok) throw new Error("Unable to load the example manifest");
   return response.json();
 }).then(data => { state.data = data; render(); }).catch(() => {

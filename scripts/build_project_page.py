@@ -193,7 +193,7 @@ def export_sample(method_rows, metrics, output, esc_license, kaggle):
     tracks = [
         ("mixture", "Mixture", row["mix_path"]),
         ("normal", "Normal reference", row["normal_path"]),
-        ("novel", "Novel reference", row["novel_path"]),
+        ("novel", "Anomalous reference", row["novel_path"]),
     ] + [(key, name, method_rows[method]["pred_novel_path"]) for method, key, name in METHODS]
     loaded = []
     for key, name, source in tracks:
@@ -277,7 +277,7 @@ def main():
     data = {"version": 1, "experiment": root.name,
             "selection_policy": {
                 "novel": f"One example per class. Require AnomSep CLAP >= {CLAP_QUALITY_FLOOR:.2f} and strictly higher CLAP than both NNE and SAM-Audio w/ Fine-Tuning. Maximize the smaller of the two CLAP gains; break ties by the gain over SAM-Audio w/ Fine-Tuning, then AnomSep CLAP, then sample ID, all in descending order.",
-                "normal": "Two airport, two metro station, and one public square examples. Select correct AnomSep normal decisions with the smallest AnomSep/FT saved novelty-score ratio; use distinct source recordings and cities within each scene.",
+                "normal": "Two airport, two metro station, and one public square examples. Select correct AnomSep normal decisions with the smallest AnomSep/FT saved anomaly-score ratio; use distinct source recordings and cities within each scene.",
                 "scope": "Qualitative, deliberately selected examples; not a random sample or an aggregate evaluation."},
             "export": {"audio": "32-bit FLOAT WAV; one shared attenuation per example; no independent normalization",
                        "spectrogram_db_range": [SPECTROGRAM_MIN_DB, SPECTROGRAM_MAX_DB],
