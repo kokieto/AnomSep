@@ -2,8 +2,8 @@
   "version": 1,
   "experiment": "NovelSoundSep_v19",
   "selection_policy": {
-    "novel": "One example per class. Require NovelSep CLAP >= 0.60 and strictly higher CLAP than both NNE and SAM-Audio w/ Fine-Tuning. Maximize the smaller of the two CLAP gains; break ties by the gain over SAM-Audio w/ Fine-Tuning, then NovelSep CLAP, then sample ID, all in descending order.",
-    "normal": "Two airport, two metro station, and one public square examples. Select correct NovelSep normal decisions with the smallest NovelSep/FT saved novelty-score ratio; use distinct source recordings and cities within each scene.",
+    "novel": "One example per class. Require AnomSep CLAP >= 0.60 and strictly higher CLAP than both NNE and SAM-Audio w/ Fine-Tuning. Maximize the smaller of the two CLAP gains; break ties by the gain over SAM-Audio w/ Fine-Tuning, then AnomSep CLAP, then sample ID, all in descending order.",
+    "normal": "Two airport, two metro station, and one public square examples. Select correct AnomSep normal decisions with the smallest AnomSep/FT saved novelty-score ratio; use distinct source recordings and cities within each scene.",
     "scope": "Qualitative, deliberately selected examples; not a random sample or an aggregate evaluation."
   },
   "export": {
@@ -133,10 +133,10 @@
           "selected_threshold": 0.0258292611688375
         },
         {
-          "key": "novelsep",
-          "name": "NovelSep",
-          "audio": "assets/audio/eval_scene_airport_1_00575/novelsep.wav",
-          "spectrogram": "assets/audio/eval_scene_airport_1_00575/novelsep.png",
+          "key": "anomsep",
+          "name": "AnomSep",
+          "audio": "assets/audio/eval_scene_airport_1_00575/anomsep.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_1_00575/anomsep.png",
           "source_sha256": "dbe69b83c2a8a877977e8df64f1b9885f9bd8aa4e0ffce60042676b619634278",
           "audio_sha256": "f5021f4b831f471fd8ba1ddbb5a74798841e04018802446d045feccd8592b37f",
           "sample_rate": 16000,
@@ -261,10 +261,10 @@
           "selected_threshold": 0.0258292611688375
         },
         {
-          "key": "novelsep",
-          "name": "NovelSep",
-          "audio": "assets/audio/eval_scene_airport_1_00302/novelsep.wav",
-          "spectrogram": "assets/audio/eval_scene_airport_1_00302/novelsep.png",
+          "key": "anomsep",
+          "name": "AnomSep",
+          "audio": "assets/audio/eval_scene_airport_1_00302/anomsep.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_1_00302/anomsep.png",
           "source_sha256": "bf816faaaa860a218837e0c5e17507e911566cc7558a2fcfacd34e121c2161f7",
           "audio_sha256": "bc95f67a788c4611b4955eb1d4caef4eb0b78a2e74ebce81f85115deb92fb96b",
           "sample_rate": 16000,
@@ -410,10 +410,10 @@
           "selected_threshold": 0.0258292611688375
         },
         {
-          "key": "novelsep",
-          "name": "NovelSep",
-          "audio": "assets/audio/eval_scene_airport_1_00184/novelsep.wav",
-          "spectrogram": "assets/audio/eval_scene_airport_1_00184/novelsep.png",
+          "key": "anomsep",
+          "name": "AnomSep",
+          "audio": "assets/audio/eval_scene_airport_1_00184/anomsep.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_1_00184/anomsep.png",
           "source_sha256": "1312f919a6907649c2d3360a66513bd717138e8e1f3e593e67f7de46a1f29bf4",
           "audio_sha256": "46e215bdb6518c1afc05d25f3f856debd808dbdc43b7117adb04e9392b3da8c2",
           "sample_rate": 16000,
@@ -549,10 +549,10 @@
           "selected_threshold": 0.0180512554943561
         },
         {
-          "key": "novelsep",
-          "name": "NovelSep",
-          "audio": "assets/audio/eval_scene_metro_station_1_00299/novelsep.wav",
-          "spectrogram": "assets/audio/eval_scene_metro_station_1_00299/novelsep.png",
+          "key": "anomsep",
+          "name": "AnomSep",
+          "audio": "assets/audio/eval_scene_metro_station_1_00299/anomsep.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_1_00299/anomsep.png",
           "source_sha256": "868b8726dd6e94a96aab94a7856e72f2b19f59bcff6516256cfe16a199e61234",
           "audio_sha256": "02b87ef2c8a879ee9938fdfdd542612f74aa2819afa2cdf2f9a8a9c53fd0b97f",
           "sample_rate": 16000,
@@ -678,10 +678,10 @@
           "selected_threshold": 0.0180512554943561
         },
         {
-          "key": "novelsep",
-          "name": "NovelSep",
-          "audio": "assets/audio/eval_scene_metro_station_1_00522/novelsep.wav",
-          "spectrogram": "assets/audio/eval_scene_metro_station_1_00522/novelsep.png",
+          "key": "anomsep",
+          "name": "AnomSep",
+          "audio": "assets/audio/eval_scene_metro_station_1_00522/anomsep.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_1_00522/anomsep.png",
           "source_sha256": "61df8feefe7a21f8e5990ef756d5dd5f968c3e731393c53cbc8de48ebb7fdf50",
           "audio_sha256": "dbbfe691a82cc0e3e5dbafae04cb7308b163e9197a174d8cff93243359b22384",
           "sample_rate": 16000,
@@ -806,10 +806,10 @@
           "selected_threshold": 0.0258292611688375
         },
         {
-          "key": "novelsep",
-          "name": "NovelSep",
-          "audio": "assets/audio/eval_scene_airport_0_00295/novelsep.wav",
-          "spectrogram": "assets/audio/eval_scene_airport_0_00295/novelsep.png",
+          "key": "anomsep",
+          "name": "AnomSep",
+          "audio": "assets/audio/eval_scene_airport_0_00295/anomsep.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_0_00295/anomsep.png",
           "source_sha256": "04bf1926554e0f903caa3bccf663a56b9b6aa978e8f082aff4640e1975833f1d",
           "audio_sha256": "64aaeb612fd74571419d131a4cecfa86ea04a4ee0c30dc27d124ba7543da6809",
           "sample_rate": 16000,
@@ -923,10 +923,10 @@
           "selected_threshold": 0.0258292611688375
         },
         {
-          "key": "novelsep",
-          "name": "NovelSep",
-          "audio": "assets/audio/eval_scene_airport_0_00154/novelsep.wav",
-          "spectrogram": "assets/audio/eval_scene_airport_0_00154/novelsep.png",
+          "key": "anomsep",
+          "name": "AnomSep",
+          "audio": "assets/audio/eval_scene_airport_0_00154/anomsep.wav",
+          "spectrogram": "assets/audio/eval_scene_airport_0_00154/anomsep.png",
           "source_sha256": "d1e9a5f0086a48263235d19e4bf65ff8a60e44198bfa89b9a4d9ea0e5643c8de",
           "audio_sha256": "47c4906a8e3f06271e4462f920ba5a8adf1404bab66e03272c250803bc2ee156",
           "sample_rate": 16000,
@@ -1040,10 +1040,10 @@
           "selected_threshold": 0.0180512554943561
         },
         {
-          "key": "novelsep",
-          "name": "NovelSep",
-          "audio": "assets/audio/eval_scene_metro_station_0_00115/novelsep.wav",
-          "spectrogram": "assets/audio/eval_scene_metro_station_0_00115/novelsep.png",
+          "key": "anomsep",
+          "name": "AnomSep",
+          "audio": "assets/audio/eval_scene_metro_station_0_00115/anomsep.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_0_00115/anomsep.png",
           "source_sha256": "fa688bf0afe7ad1b9bc9fe3d01c268124e281e451eb545118ecefd85e4eab5a7",
           "audio_sha256": "d99327d88a34127d6ff39cdda133438534a8afc0fcb9b55975dd04d5395bfc7c",
           "sample_rate": 16000,
@@ -1157,10 +1157,10 @@
           "selected_threshold": 0.0180512554943561
         },
         {
-          "key": "novelsep",
-          "name": "NovelSep",
-          "audio": "assets/audio/eval_scene_metro_station_0_00121/novelsep.wav",
-          "spectrogram": "assets/audio/eval_scene_metro_station_0_00121/novelsep.png",
+          "key": "anomsep",
+          "name": "AnomSep",
+          "audio": "assets/audio/eval_scene_metro_station_0_00121/anomsep.wav",
+          "spectrogram": "assets/audio/eval_scene_metro_station_0_00121/anomsep.png",
           "source_sha256": "b934cf5de1fe3edfed6a251e7dbef494ba543a93bff13c0fec845828927e356b",
           "audio_sha256": "530084e742f06e3282fe2b57662b56440c1e3cf38b166232b17fd75e942bc3b1",
           "sample_rate": 16000,
@@ -1274,10 +1274,10 @@
           "selected_threshold": 0.0085272565484046
         },
         {
-          "key": "novelsep",
-          "name": "NovelSep",
-          "audio": "assets/audio/eval_scene_public_square_0_00233/novelsep.wav",
-          "spectrogram": "assets/audio/eval_scene_public_square_0_00233/novelsep.png",
+          "key": "anomsep",
+          "name": "AnomSep",
+          "audio": "assets/audio/eval_scene_public_square_0_00233/anomsep.wav",
+          "spectrogram": "assets/audio/eval_scene_public_square_0_00233/anomsep.png",
           "source_sha256": "7380f079a63c04efa3f97be5e5cd5536376e234bafba4843d9861e79399c6e26",
           "audio_sha256": "840dfd4c8db0cb21c31ca7f0b3328b99aa8c485b6da16ccf35bd06d61b7f5588",
           "sample_rate": 16000,

@@ -1,12 +1,12 @@
-NovelSep Research-Only License
+AnomSep Research-Only License
 Version 1.0
-SPDX-License-Identifier: LicenseRef-NovelSep-Research-Only
+SPDX-License-Identifier: LicenseRef-AnomSep-Research-Only
 
 Copyright (c) 2026 Koki Shoda
 
 1. Scope
 
-This license applies to the original NovelSep source code and associated
+This license applies to the original AnomSep source code and associated
 documentation distributed with this license (the "Software"). Third-party
 software, models, model derivatives, audio recordings, and dataset material
 remain subject to their respective licenses. This license grants no additional

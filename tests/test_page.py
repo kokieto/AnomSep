@@ -25,7 +25,7 @@ def test_demo_coverage_and_integrity():
     })
     assert Counter(sample["scene"] for sample in normal) == {"airport": 2, "metro_station": 2, "public_square": 1}
     assert len({sample["normal_recording"] for sample in normal}) == 5
-    expected_methods = ["SAM-Audio", "SAM-Audio w/ Fine-Tuning", "NNE", "NovelSep"]
+    expected_methods = ["SAM-Audio", "SAM-Audio w/ Fine-Tuning", "NNE", "AnomSep"]
     for sample in samples:
         assert 0 < sample["playback_gain"] <= 1
         assert len(sample["tracks"]) == 7

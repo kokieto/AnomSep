@@ -7,7 +7,7 @@ from numpy.testing import assert_allclose
 torch = pytest.importorskip("torch")
 torchaudio = pytest.importorskip("torchaudio")
 
-from novelsep.embeddings import PEAVAudioEmbedder
+from anomsep.embeddings import PEAVAudioEmbedder
 
 
 class Batch(dict):

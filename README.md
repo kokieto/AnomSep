@@ -1,28 +1,28 @@
-# NovelSep
+# AnomSep
 
-**NovelSep: Bridging Optimization-Based Separation and Deep Neural Refinement
-for Novelty Detection with Listenable Explanations**
+**AnomSep: Bridging Optimization-Based Separation and Deep Neural Refinement
+for Anomaly Detection with Listenable Explanations**
 
 Koki Shoda, Jun Younes Louhi Kasahara, Qi An, and Atsushi Yamashita
 
 The University of Tokyo
 
-[Project page](https://kokieto.github.io/NovelSep/) ·
-[Model weights](https://huggingface.co/kokieto/NovelSep)
+[Project page](https://kokieto.github.io/AnomSep/) ·
+[Model weights](https://huggingface.co/kokieto/AnomSep)
 
-NovelSep initializes latent flow refinement with normal and novel waveforms
+AnomSep initializes latent flow refinement with normal and novel waveforms
 estimated by Nonnegative Novelty Extraction (NNE). The energy of the refined
 novel waveform is the novelty score; the same waveform provides a listenable
 explanation. Normal Region Exclusion selects surrogate novel training clips by
 excluding external audio near the normal embedding distribution.
 
-This repository provides reusable `NovelSep` and `NormalRegionExclusion`
+This repository provides reusable `AnomSep` and `NormalRegionExclusion`
 classes, pretrained inference, the flow-matching training loss, NNE dictionary
 learning, and a reproducible project-page builder. The internal experiment
 orchestration and training datasets are not required for inference.
 
 The original source code is available for **noncommercial research only** under
-the [NovelSep Research-Only License](LICENSE).
+the [AnomSep Research-Only License](LICENSE).
 
 ## Installation
 
@@ -31,10 +31,10 @@ The paper used an NVIDIA GPU; CPU inference is supported but slow and is not
 numerically identical to the CUDA BF16/TF32 evaluation.
 
 ```bash
-conda create -n novelsep python=3.11 -y
-conda activate novelsep
-git clone https://github.com/kokieto/NovelSep.git
-cd NovelSep
+conda create -n anomsep python=3.11 -y
+conda activate anomsep
+git clone https://github.com/kokieto/AnomSep.git
+cd AnomSep
 pip install -e '.[audio,dev]'
 pip install 'sam_audio @ git+https://github.com/facebookresearch/sam-audio.git@68b48d48fff1ad776d3afefbe634eb5f5d60ba7b'
 hf auth login
@@ -43,12 +43,12 @@ hf auth login
 Request access to [facebook/sam-audio-small](https://huggingface.co/facebook/sam-audio-small)
 before loading a model. Install FFmpeg if required by the upstream audio backend.
 SAM-Audio downloads its own dependencies, including text-model weights. The
-NovelSep adapters contain no copy of the pretrained SAM-Audio checkpoint.
+AnomSep adapters contain no copy of the pretrained SAM-Audio checkpoint.
 
 ## Separate audio
 
 ```bash
-novelsep input.wav --environment airport --output outputs/airport
+anomsep input.wav --environment airport --output outputs/airport
 ```
 
 The command writes `normal.wav`, `novel.wav`, and `result.json`. WAV files use
@@ -57,10 +57,10 @@ energy score, threshold, decision, and input normalization gain.
 
 ```python
 import soundfile as sf
-from novelsep import NovelSep
+from anomsep import AnomSep
 
 wave, sr = sf.read('input.wav', dtype='float32', always_2d=True)
-separator = NovelSep.from_pretrained(environment='airport', device='cuda')
+separator = AnomSep.from_pretrained(environment='airport', device='cuda')
 result = separator.separate(wave.T, sample_rate=sr)
 sf.write('novel.wav', result.novel, result.sample_rate, subtype='FLOAT')
 print(result.is_novel, result.novelty_score)
@@ -88,13 +88,13 @@ the NNE initializer always runs in float32 with autocast disabled.
 GPU batch size and library versions can affect numerical outputs; the page
 plays the saved evaluation outputs. For fully offline execution, first cache
 all upstream assets and set `HF_HUB_OFFLINE=1` before starting Python.
-`local_files_only=True` controls the NovelSep and base-model snapshot lookup;
+`local_files_only=True` controls the AnomSep and base-model snapshot lookup;
 upstream text-model loading also needs the offline environment setting.
 
 ## Normal Region Exclusion
 
 ```python
-from novelsep import NormalRegionExclusion
+from anomsep import NormalRegionExclusion
 
 exclusion = NormalRegionExclusion()
 exclusion.fit(normal_embeddings, candidate_embeddings, recording_ids)
@@ -122,7 +122,7 @@ The optional audio wrapper prepares peak-normalized PE_AV embeddings using
 the upstream Perception Models package installed with SAM-Audio:
 
 ```python
-from novelsep.embeddings import PEAVAudioEmbedder
+from anomsep.embeddings import PEAVAudioEmbedder
 
 encoder = PEAVAudioEmbedder(device='cuda')
 normal_embeddings = encoder.encode(normal_waveforms, sample_rate=16000)
@@ -139,8 +139,8 @@ encoder and preprocessing as the paper; it is not a universal audio filter.
 
 ## Adapting the modules
 
-`novelsep.nne.train_dictionary` learns a nonnegative normal-sound dictionary
-from mono 16 kHz training clips. `NNEFlowInitializer` in `novelsep.flow` exposes
+`anomsep.nne.train_dictionary` learns a nonnegative normal-sound dictionary
+from mono 16 kHz training clips. `NNEFlowInitializer` in `anomsep.flow` exposes
 the preliminary separation, latent initialization, and flow loss independently
 of the public checkpoint loader. A new environment requires a dictionary,
 paired training mixtures, a fitted exclusion geometry, and a new detection
@@ -176,7 +176,7 @@ pytest
 
 The demo uses the saved evaluation waveforms and metrics of the paper's v19
 experiment. It presents five normal-only examples and five novel-containing
-examples, comparing SAM-Audio, SAM-Audio w/ Fine-Tuning, NNE, and NovelSep.
+examples, comparing SAM-Audio, SAM-Audio w/ Fine-Tuning, NNE, and AnomSep.
 The novel examples favor large positive CLAP improvements over fine-tuned
 SAM-Audio while covering each novel class. These are selected illustrations;
 they are not an unbiased estimate of average performance. See the page's
@@ -189,7 +189,7 @@ dictionary, and geometry bundles. Neither script downloads the training data.
 ## License
 
 Original source code and associated documentation use the
-[NovelSep Research-Only License](LICENSE). Noncommercial scientific experiments,
+[AnomSep Research-Only License](LICENSE). Noncommercial scientific experiments,
 evaluation, benchmarking, and reproduction of research results are permitted.
 Redistributed code and modifications must retain this license and its notices.
 Commercial use, commercial product or service development, and production
@@ -200,4 +200,4 @@ granted for earlier copies released under MIT.
 SAM-Audio and derived model adapters use the SAM License. Audio datasets retain
 their original terms, including the noncommercial terms for TAU recordings.
 See [THIRD_PARTY.md](THIRD_PARTY.md), the
-[model card](https://huggingface.co/kokieto/NovelSep), and the page credits.
+[model card](https://huggingface.co/kokieto/AnomSep), and the page credits.

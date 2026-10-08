@@ -8,15 +8,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("audio", type=Path)
     parser.add_argument("--environment", default="airport", choices=["airport", "metro_station", "public_square", "sonyc_ust_alert_signal"])
-    parser.add_argument("--model", default="kokieto/NovelSep")
+    parser.add_argument("--model", default="kokieto/AnomSep")
     parser.add_argument("--device", default=None)
     parser.add_argument("--output", type=Path, default=Path("outputs"))
     parser.add_argument("--no-normalize", action="store_true")
     args = parser.parse_args()
     import soundfile as sf
-    from .separator import NovelSep
+    from .separator import AnomSep
     wave, sr = sf.read(args.audio, dtype="float32", always_2d=True)
-    model = NovelSep.from_pretrained(args.model, environment=args.environment, device=args.device)
+    model = AnomSep.from_pretrained(args.model, environment=args.environment, device=args.device)
     result = model.separate(wave.T, sr, normalize=not args.no_normalize)
     args.output.mkdir(parents=True, exist_ok=True)
     sf.write(args.output / "normal.wav", result.normal, result.sample_rate, subtype="FLOAT")

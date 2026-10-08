@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export trusted experiment checkpoints to the portable NovelSep release format.
+"""Export trusted experiment checkpoints to the portable AnomSep release format.
 
 No upload is performed. Original checkpoint and dictionary identities are verified
 before exporting, and all tensor bytes are checked again after serialization.
@@ -138,7 +138,7 @@ def export_environment(root: Path, output: Path, environment: str, revision: str
             raise ValueError(f"Invalid tensor: {name}")
         tensors[name] = value.detach().cpu().contiguous()
     adapter_path = destination / "adapter.safetensors"
-    save_file(tensors, str(adapter_path), metadata={"format": "pt", "method": "NovelSep"})
+    save_file(tensors, str(adapter_path), metadata={"format": "pt", "method": "AnomSep"})
     restored = load_file(str(adapter_path))
     if set(restored) != set(tensors):
         raise ValueError("Adapter tensor names changed during export")
@@ -163,7 +163,7 @@ def export_environment(root: Path, output: Path, environment: str, revision: str
     )
     config = {
         "format_version": 1,
-        "method": "NovelSep",
+        "method": "AnomSep",
         "base_model": args["model_id"],
         "base_model_revision": revision,
         "environment": environment,

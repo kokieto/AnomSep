@@ -8,7 +8,7 @@ from numpy.testing import assert_allclose, assert_array_equal
 from sklearn.decomposition import PCA
 from sklearn.metrics import pairwise_distances
 
-from novelsep.normal_region_exclusion import NormalRegionExclusion
+from anomsep.normal_region_exclusion import NormalRegionExclusion
 
 
 @pytest.fixture

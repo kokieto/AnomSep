@@ -4,7 +4,7 @@ METHODS = (
     ("Sam-Audio", "sam_audio", "SAM-Audio"),
     ("Sam-Audio_FT", "sam_audio_ft", "SAM-Audio w/ Fine-Tuning"),
     ("NNE", "nne", "NNE"),
-    ("NovelSoundSep", "novelsep", "NovelSep"),
+    ("NovelSoundSep", "anomsep", "AnomSep"),
 )
 NOVEL_CLASSES = ("siren", "glass_break", "gun_shot", "baby_cry", "screaming")
 NORMAL_SCENE_COUNTS = {"airport": 2, "metro_station": 2, "public_square": 1}

@@ -31,7 +31,7 @@ class SeparationResult:
     input_gain: float
 
 
-class NovelSep:
+class AnomSep:
     """Normal/novel separation with an environment-specific dictionary and LoRA.
 
     Use from_pretrained() to load a published environment. Two-dimensional input
@@ -50,7 +50,7 @@ class NovelSep:
         self.threshold = float(config["detection_threshold"])
 
     @classmethod
-    def from_pretrained(cls, repo_id="kokieto/NovelSep", *, environment="airport",
+    def from_pretrained(cls, repo_id="kokieto/AnomSep", *, environment="airport",
                         device=None, revision=None, local_files_only=False):
         """Load an environment subfolder from Hugging Face or a local export.
 
@@ -72,8 +72,8 @@ class NovelSep:
                 allow_patterns=[f"{environment}/*"], local_files_only=local_files_only))
         folder = root / environment
         config = json.loads((folder / "config.json").read_text())
-        if config.get("format_version") != 1 or config.get("method") != "NovelSep":
-            raise ValueError("Unsupported NovelSep checkpoint format")
+        if config.get("format_version") != 1 or config.get("method") not in {"AnomSep", "NovelSep"}:
+            raise ValueError("Unsupported AnomSep checkpoint format")
         dictionary_path = folder / "nne_model.npz"
         if hashlib.sha256(dictionary_path.read_bytes()).hexdigest() != config["nne_file_sha256"]:
             raise ValueError("NNE dictionary does not match the trained adapter")

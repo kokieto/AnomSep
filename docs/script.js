@@ -19,7 +19,7 @@ function link(text, url) {
 }
 
 function trackCard(track, sample, reference) {
-  const card = element("article", `track${track.key === "novelsep" ? " ours" : ""}`);
+  const card = element("article", `track${track.key === "anomsep" ? " ours" : ""}`);
   const header = element("div", "track-header");
   const heading = element("h4", "", track.name);
   if (!reference) heading.append(element("span", "component", "Estimated novel component"));

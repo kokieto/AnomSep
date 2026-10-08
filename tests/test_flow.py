@@ -4,9 +4,9 @@ import numpy as np
 import pytest
 import torch
 
-from novelsep.flow import (NNEFlowInitializer, TorchNNENoveltyExtractor,
+from anomsep.flow import (NNEFlowInitializer, TorchNNENoveltyExtractor,
                           initial_state_flow_matching_loss)
-from novelsep.nne import NNEParams
+from anomsep.nne import NNEParams
 
 
 @pytest.fixture

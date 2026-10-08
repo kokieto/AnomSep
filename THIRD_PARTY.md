@@ -1,6 +1,6 @@
 # Third-party components
 
-The [NovelSep Research-Only License](LICENSE) covers original NovelSep source
+The [AnomSep Research-Only License](LICENSE) covers original AnomSep source
 code and associated documentation. It does not replace or modify the terms
 for the third-party components and assets listed below.
 

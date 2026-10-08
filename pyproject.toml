@@ -3,11 +3,11 @@ requires = ["setuptools>=77.0.3"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "novelsep"
-version = "0.1.1"
-description = "Novelty separation and Normal Region Exclusion"
+name = "anomsep"
+version = "0.1.2"
+description = "AnomSep: anomaly detection with listenable explanations and Normal Region Exclusion"
 readme = "README.md"
-license = "LicenseRef-NovelSep-Research-Only"
+license = "LicenseRef-AnomSep-Research-Only"
 license-files = ["LICENSE", "LICENSES/*.txt", "THIRD_PARTY.md"]
 requires-python = ">=3.11"
 authors = [{name = "Koki Shoda"}]
@@ -18,7 +18,7 @@ audio = ["torch>=2.7", "torchaudio>=2.7", "soundfile>=0.12", "librosa>=0.10", "h
 dev = ["pytest>=8", "pandas>=2", "matplotlib>=3.8", "soundfile>=0.12", "pyyaml>=6"]
 
 [project.scripts]
-novelsep = "novelsep.cli:main"
+anomsep = "anomsep.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
