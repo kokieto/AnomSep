@@ -28,8 +28,9 @@ from scipy import signal
 from page_config import (
     CLAP_QUALITY_FLOOR, DISPLAY_SAMPLE_RATE, ESC_LICENSE_URL,
     KAGGLE_METADATA_URL, KAGGLE_URL, METHODS, NORMAL_SCENE_COUNTS,
-    NOVEL_CLASSES, PLAYBACK_PEAK, SPECTROGRAM_HOP, SPECTROGRAM_MAX_DB,
-    SPECTROGRAM_MIN_DB, SPECTROGRAM_NFFT, TAU_URL, TUT_URL,
+    NOVEL_CLASSES, PLAYBACK_PEAK, SPECTROGRAM_HOP, SPECTROGRAM_NFFT,
+    SPECTROGRAM_PERCENTILES, SPECTROGRAM_PERCENTILE_METHOD,
+    SPECTROGRAM_REFERENCE_AMPLITUDE, SPECTROGRAM_AMPLITUDE_FLOOR, TAU_URL, TUT_URL,
 )
 
 
@@ -170,11 +171,10 @@ def spectrogram(samples, sample_rate):
     return np.abs(spectrum)
 
 
-def save_spectrogram(path, magnitude, peak, duration):
-    decibels = 20 * np.log10(np.maximum(magnitude / peak, 1e-10))
+def save_spectrogram(path, decibels, limits, duration):
     fig, ax = plt.subplots(figsize=(4.1, 1.65), dpi=140)
     ax.imshow(decibels, origin="lower", aspect="auto", extent=[0, duration, 0, DISPLAY_SAMPLE_RATE / 2000],
-              cmap="magma", vmin=SPECTROGRAM_MIN_DB, vmax=SPECTROGRAM_MAX_DB, interpolation="nearest")
+              cmap="magma", vmin=limits[0], vmax=limits[1], interpolation="nearest")
     ax.set(xlabel="Time (s)", ylabel="kHz", xticks=[0, duration / 2, duration], yticks=[0, 4, 8])
     ax.tick_params(labelsize=8, length=2)
     ax.xaxis.label.set_size(8)
@@ -182,6 +182,70 @@ def save_spectrogram(path, magnitude, peak, duration):
     fig.subplots_adjust(left=.105, right=.985, bottom=.25, top=.98)
     fig.savefig(path)
     plt.close(fig)
+
+
+def spectrogram_settings():
+    return {"spectrogram_scale": "mixture_percentile",
+            "spectrogram_percentiles": list(SPECTROGRAM_PERCENTILES),
+            "spectrogram_percentile_method": SPECTROGRAM_PERCENTILE_METHOD,
+            "spectrogram_reference_amplitude": SPECTROGRAM_REFERENCE_AMPLITUDE,
+            "spectrogram_amplitude_floor": SPECTROGRAM_AMPLITUDE_FLOOR,
+            "spectrogram_sample_rate": DISPLAY_SAMPLE_RATE,
+            "spectrogram_fft": SPECTROGRAM_NFFT, "spectrogram_hop": SPECTROGRAM_HOP}
+
+
+def render_sample_spectrograms(output, sample):
+    """Apply the mixture's dB percentiles to all tracks, including silent references."""
+    if not 0 <= SPECTROGRAM_PERCENTILES[0] < SPECTROGRAM_PERCENTILES[1] <= 100:
+        raise ValueError("Invalid spectrogram percentiles")
+    if SPECTROGRAM_REFERENCE_AMPLITUDE <= 0 or SPECTROGRAM_AMPLITUDE_FLOOR <= 0:
+        raise ValueError("Spectrogram amplitude reference and floor must be positive")
+    spectra = {}
+    for track in sample["tracks"]:
+        path = output / track["audio"]
+        if sha256(path) != track["audio_sha256"]:
+            raise ValueError(f"Audio hash mismatch: {path}")
+        audio, sample_rate = sf.read(path, dtype="float32")
+        if audio.ndim != 1 or not len(audio) or not np.isfinite(audio).all():
+            raise ValueError(f"Expected finite mono audio: {path}")
+        magnitude = spectrogram(audio, sample_rate)
+        spectra[track["key"]] = 20 * np.log10(
+            np.maximum(magnitude, SPECTROGRAM_AMPLITUDE_FLOOR) / SPECTROGRAM_REFERENCE_AMPLITUDE)
+    limits = np.percentile(spectra["mixture"], SPECTROGRAM_PERCENTILES,
+                           method=SPECTROGRAM_PERCENTILE_METHOD).astype(float)
+    if not np.isfinite(limits).all() or limits[0] >= limits[1]:
+        raise ValueError(f"Mixture has no valid percentile range: {sample['id']}")
+    sample["spectrogram_reference"] = "Mixture dB spectrogram percentiles; shared limits for all seven tracks"
+    sample["spectrogram_db_range"] = limits.tolist()
+    for track in sample["tracks"]:
+        path = output / track["spectrogram"]
+        save_spectrogram(path, spectra[track["key"]], limits, sample["duration"])
+        track["spectrogram_sha256"] = sha256(path)
+
+
+def save_manifest(output, data):
+    manifest = output / "assets/project-data.json"
+    manifest.parent.mkdir(exist_ok=True)
+    manifest.write_text(json.dumps(data, indent=2, allow_nan=False) + "\n")
+    script = output / "script.js"
+    if script.exists():
+        script.write_text(re.sub(r'assets/project-data\.json(?:\?v=[^"\s]*)?',
+                                 f"assets/project-data.json?v={sha256(manifest)[:12]}", script.read_text()))
+        index = output / "index.html"
+        if index.exists():
+            index.write_text(re.sub(r'src="script\.js(?:\?v=[^"]*)?"',
+                                    f'src="script.js?v={sha256(script)[:12]}"', index.read_text()))
+
+
+def refresh_spectrograms(output):
+    data = json.loads((output / "assets/project-data.json").read_text())
+    for sample in data["samples"]:
+        render_sample_spectrograms(output, sample)
+        print(f"Refreshed spectrograms: {sample['id']}")
+    data["version"] = 2
+    data["export"].pop("spectrogram_db_range", None)
+    data["export"].update(spectrogram_settings())
+    save_manifest(output, data)
 
 
 def export_sample(method_rows, metrics, output, esc_license, kaggle):
@@ -200,26 +264,23 @@ def export_sample(method_rows, metrics, output, esc_license, kaggle):
         audio, sample_rate = sf.read(source, dtype="float32")
         if audio.ndim != 1 or not np.isfinite(audio).all():
             raise ValueError(f"Expected finite mono audio: {sid}/{key}")
-        loaded.append((key, name, source, audio, sample_rate, spectrogram(audio, sample_rate)))
+        loaded.append((key, name, source, audio, sample_rate))
     shared_peak = max(float(np.max(np.abs(item[3]))) for item in loaded)
     gain = PLAYBACK_PEAK / shared_peak if shared_peak > 1.0 else 1.0
-    spec_peak = max(float(np.max(item[5])) for item in loaded)
     result = {"id": sid, "kind": "novel" if row["label"] == "1" else "normal", "scene": row["scene"],
               "city": row["city"], "novel_class": row["novelty_class"] or None,
               "normal_recording": Path(row["tau_file"]).name, "normal_segment": int(row["clip_segment_index"]),
               "source_sequence_strategy": row["novel_source_sequence_strategy"] or None,
               "duration": len(loaded[0][3]) / loaded[0][4], "playback_gain": gain,
-              "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
               "tracks": [], "attributions": source_credits(row, esc_license, kaggle)}
     if row["label"] == "1":
         result["clap_gap"] = float(metrics["NovelSoundSep"][sid]["clap_audio_cosine"]) - float(metrics["Sam-Audio_FT"][sid]["clap_audio_cosine"])
         result["nnr_db"] = float(row["nnr_db"])
-    for key, name, source, audio, sample_rate, magnitude in loaded:
+    for key, name, source, audio, sample_rate in loaded:
         if abs(len(audio) / sample_rate - result["duration"]) > 1 / sample_rate:
             raise ValueError(f"Mismatched audio duration: {sid}/{key}")
         wav = target / f"{key}.wav"
         sf.write(wav, audio * gain, sample_rate, subtype="FLOAT")
-        save_spectrogram(target / f"{key}.png", magnitude, spec_peak, result["duration"])
         track = {"key": key, "name": name, "audio": str(relative / wav.name),
                  "spectrogram": str(relative / f"{key}.png"), "source_sha256": sha256(source),
                  "audio_sha256": sha256(wav), "sample_rate": sample_rate,
@@ -234,6 +295,7 @@ def export_sample(method_rows, metrics, output, esc_license, kaggle):
                 track["clap"] = float(metrics[matched_method][sid]["clap_audio_cosine"])
                 track["saj"] = float(metrics[matched_method][sid]["JudgeOverall"])
         result["tracks"].append(track)
+    render_sample_spectrograms(output, result)
     return result
 
 
@@ -261,11 +323,18 @@ def write_attributions(output, samples):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--experiment-root", type=Path, required=True)
-    parser.add_argument("--paper-figure", type=Path, required=True)
-    parser.add_argument("--tau-license", type=Path, required=True)
+    parser.add_argument("--experiment-root", type=Path)
+    parser.add_argument("--paper-figure", type=Path)
+    parser.add_argument("--tau-license", type=Path)
+    parser.add_argument("--refresh-spectrograms", action="store_true",
+                        help="Re-render the existing examples from committed WAVs; keep audio, selection, and scores.")
     parser.add_argument("--output", type=Path, default=Path(__file__).resolve().parents[1] / "docs")
     args = parser.parse_args()
+    if args.refresh_spectrograms:
+        refresh_spectrograms(args.output)
+        return
+    if any(value is None for value in (args.experiment_root, args.paper_figure, args.tau_license)):
+        parser.error("A full rebuild requires --experiment-root, --paper-figure, and --tau-license")
     args.output.mkdir(parents=True, exist_ok=True)
     root = args.experiment_root
     esc_license, kaggle = prepare_licenses(args.output, args.tau_license)
@@ -274,21 +343,18 @@ def main():
     metrics = {method: {row["sample_id"]: row for row in read_csv(path)} for method, path in metric_paths.items()}
     selections = select_samples(read_csv(source_table), metrics)
     samples = [export_sample(rows, metrics, args.output, esc_license, kaggle) for rows in selections]
-    data = {"version": 1, "experiment": root.name,
+    data = {"version": 2, "experiment": root.name,
             "selection_policy": {
                 "novel": f"One example per class. Require AnomSep CLAP >= {CLAP_QUALITY_FLOOR:.2f} and strictly higher CLAP than both NNE and SAM-Audio w/ Fine-Tuning. Maximize the smaller of the two CLAP gains; break ties by the gain over SAM-Audio w/ Fine-Tuning, then AnomSep CLAP, then sample ID, all in descending order.",
                 "normal": "Two airport, two metro station, and one public square examples. Select correct AnomSep normal decisions with the smallest AnomSep/FT saved anomaly-score ratio; use distinct source recordings and cities within each scene.",
                 "scope": "Qualitative, deliberately selected examples; not a random sample or an aggregate evaluation."},
             "export": {"audio": "32-bit FLOAT WAV; one shared attenuation per example; no independent normalization",
-                       "spectrogram_db_range": [SPECTROGRAM_MIN_DB, SPECTROGRAM_MAX_DB],
-                       "spectrogram_sample_rate": DISPLAY_SAMPLE_RATE,
-                       "spectrogram_fft": SPECTROGRAM_NFFT, "spectrogram_hop": SPECTROGRAM_HOP,
+                       **spectrogram_settings(),
                        "metrics": "Saved evaluation CLAP audio-to-audio cosine similarity and SAJ Overall; neither is recomputed.",
                        "decisions": "Saved per-method predictions using the saved tuning-selected thresholds."},
             "source_tables": [{"file": source_table.name, "sha256": sha256(source_table)}] +
                              [{"file": p.name, "sha256": sha256(p)} for p in metric_paths.values()], "samples": samples}
-    (args.output / "assets").mkdir(exist_ok=True)
-    (args.output / "assets/project-data.json").write_text(json.dumps(data, indent=2, allow_nan=False) + "\n")
+    save_manifest(args.output, data)
     subprocess.run(["pdftoppm", "-singlefile", "-scale-to", "2400", "-png", str(args.paper_figure),
                     str(args.output / "assets/architecture")], check=True)
     write_attributions(args.output, samples)

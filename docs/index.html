@@ -64,8 +64,8 @@
       <noscript><p>Enable JavaScript to use the listening comparison. All files and their attributions are also available in the <a href="https://github.com/kokieto/AnomSep/tree/main/docs/assets/audio">audio directory</a>.</p></noscript>
       <div class="comparison-notes">
         <p><strong>Consistent playback.</strong> No track is normalized independently. A shared attenuation, when needed, keeps every track within an example below full scale and preserves relative amplitudes. Keep the player volume unchanged when comparing methods.</p>
-        <div class="scale-note"><span class="gradient" aria-hidden="true"></span><span>−80 to 0.0 dB · one spectrogram scale per example · 0.0–8.0 kHz</span></div>
-        <p class="small">Spectrogram levels are relative to the maximum magnitude across all reference and estimated tracks in the selected example. Detection labels are the saved predictions from each method’s tuning-selected threshold.</p>
+        <div class="scale-note"><span class="gradient" aria-hidden="true"></span><span>Mixture-based 2.5th–97.5th percentile scale · shared across all seven tracks · 0.0–8.0 kHz</span></div>
+        <p class="small">For each example, the color limits are the 2.5th and 97.5th percentiles of the mixture’s dB spectrogram. The same limits apply to all references and estimates; values outside the limits use the endpoint colors. Detection labels are the saved predictions from each method’s tuning-selected threshold.</p>
       </div>
     </section>
     <section class="resources" aria-labelledby="resources-title">
@@ -80,6 +80,6 @@
     <p class="small">Supported in part by JSPS KAKENHI Grant Numbers JP26KJ0923 and JP26K21348 and WINGS-PES at the University of Tokyo.</p>
     <p class="footer-line">AnomSep <span>Research project · Koki Shoda and collaborators</span></p>
   </footer>
-  <script src="script.js?v=f5c51f07"></script>
+  <script src="script.js?v=62174312659d"></script>
 </body>
 </html>

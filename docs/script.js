@@ -26,7 +26,7 @@ function trackCard(track, sample, reference) {
   header.append(heading);
   const spec = element("div", "spec");
   const img = element("img");
-  img.src = track.spectrogram;
+  img.src = `${track.spectrogram}?v=${track.spectrogram_sha256.slice(0, 12)}`;
   img.alt = `${track.name} spectrogram, shared intensity scale for this example`;
   img.width = 574;
   img.height = 231;
@@ -132,7 +132,7 @@ document.querySelectorAll("[data-kind]").forEach(button => {
   });
 });
 
-fetch("assets/project-data.json?v=9eff4d5d").then(response => {
+fetch("assets/project-data.json?v=a1a5c5078e3f").then(response => {
   if (!response.ok) throw new Error("Unable to load the example manifest");
   return response.json();
 }).then(data => { state.data = data; render(); }).catch(() => {

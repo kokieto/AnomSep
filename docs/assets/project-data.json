@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "experiment": "NovelSoundSep_v19",
   "selection_policy": {
     "novel": "One example per class. Require AnomSep CLAP >= 0.60 and strictly higher CLAP than both NNE and SAM-Audio w/ Fine-Tuning. Maximize the smaller of the two CLAP gains; break ties by the gain over SAM-Audio w/ Fine-Tuning, then AnomSep CLAP, then sample ID, all in descending order.",
@@ -8,15 +8,19 @@
   },
   "export": {
     "audio": "32-bit FLOAT WAV; one shared attenuation per example; no independent normalization",
-    "spectrogram_db_range": [
-      -80.0,
-      0.0
-    ],
     "spectrogram_sample_rate": 16000,
     "spectrogram_fft": 512,
     "spectrogram_hop": 128,
     "metrics": "Saved evaluation CLAP audio-to-audio cosine similarity and SAJ Overall; neither is recomputed.",
-    "decisions": "Saved per-method predictions using the saved tuning-selected thresholds."
+    "decisions": "Saved per-method predictions using the saved tuning-selected thresholds.",
+    "spectrogram_scale": "mixture_percentile",
+    "spectrogram_percentiles": [
+      2.5,
+      97.5
+    ],
+    "spectrogram_percentile_method": "linear",
+    "spectrogram_reference_amplitude": 1.0,
+    "spectrogram_amplitude_floor": 1e-10
   },
   "source_tables": [
     {
@@ -52,7 +56,7 @@
       "source_sequence_strategy": "single_file_peak_center",
       "duration": 5.0,
       "playback_gain": 1.0,
-      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "spectrogram_reference": "Mixture dB spectrogram percentiles; shared limits for all seven tracks",
       "tracks": [
         {
           "key": "mixture",
@@ -64,7 +68,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "436fc9e259027e08cfb3f2efeb9a05061f575421e37592ce0abedcd087bc4fbd"
         },
         {
           "key": "normal",
@@ -76,7 +81,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "1fcfe5aeabf101f8e535e73e04589fcc0c3c258d8914d8cd8240ae7579d45232"
         },
         {
           "key": "novel",
@@ -88,7 +94,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "9b4d93a979575ba2b957c2d5c429a5cf5fa91590176893c0ff3d7c44407e4754"
         },
         {
           "key": "sam_audio",
@@ -102,7 +109,8 @@
           "saj": 0.99442935,
           "predicted_label": 1,
           "novelty_score": 0.0299835167825222,
-          "selected_threshold": 5.862056787009351e-05
+          "selected_threshold": 5.862056787009351e-05,
+          "spectrogram_sha256": "fa1b554a777a5e2be9546758c2286cebd5a896fe674bd335dc7c0cf94c5aef4c"
         },
         {
           "key": "sam_audio_ft",
@@ -116,7 +124,8 @@
           "saj": 1.01746798,
           "predicted_label": 0,
           "novelty_score": 9.7744585758619e-09,
-          "selected_threshold": 3.671405283967033e-05
+          "selected_threshold": 3.671405283967033e-05,
+          "spectrogram_sha256": "dff961933578d5d84adab3690e91371ad0c0aa7af6bc4cc41b6a818efec6d215"
         },
         {
           "key": "nne",
@@ -130,7 +139,8 @@
           "saj": 2.60095596,
           "predicted_label": 0,
           "novelty_score": 0.0154020860791206,
-          "selected_threshold": 0.0258292611688375
+          "selected_threshold": 0.0258292611688375,
+          "spectrogram_sha256": "1dd4ddeb340e0628c37e39e8f42e1e2c73c4e3bb0f16887632602b4c162c8653"
         },
         {
           "key": "anomsep",
@@ -144,7 +154,8 @@
           "saj": 4.89227629,
           "predicted_label": 1,
           "novelty_score": 0.0064782854169607,
-          "selected_threshold": 4.967531640431844e-05
+          "selected_threshold": 4.967531640431844e-05,
+          "spectrogram_sha256": "cbfd8cdf5bfa5971ffc192bd8adcd494d3a2d979b2caa6a2b10a101c09168b9c"
         }
       ],
       "attributions": [
@@ -167,7 +178,11 @@
         }
       ],
       "clap_gap": 0.48093477000000007,
-      "nnr_db": -7.196673738618844
+      "nnr_db": -7.196673738618844,
+      "spectrogram_db_range": [
+        -92.99407024383545,
+        -29.95057048797607
+      ]
     },
     {
       "id": "eval_scene_airport_1_00302",
@@ -180,7 +195,7 @@
       "source_sequence_strategy": "concatenate_distinct_same_class_files",
       "duration": 5.0,
       "playback_gain": 0.9650729407091062,
-      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "spectrogram_reference": "Mixture dB spectrogram percentiles; shared limits for all seven tracks",
       "tracks": [
         {
           "key": "mixture",
@@ -192,7 +207,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "cc7bb226b5baa7b4899d04b1f0bdf3e21e988a6b24aa406eca0d3ecd141b732c"
         },
         {
           "key": "normal",
@@ -204,7 +220,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "10ddfde60d94b81ed10c79151433109c8538bee034afd9fea0f039489879106b"
         },
         {
           "key": "novel",
@@ -216,7 +233,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "d30b8293cc139c3be2ca4210b633cb3268b6264608e978f3a3478a1998239d71"
         },
         {
           "key": "sam_audio",
@@ -230,7 +248,8 @@
           "saj": 1.66513872,
           "predicted_label": 1,
           "novelty_score": 0.0047412905842065,
-          "selected_threshold": 5.862056787009351e-05
+          "selected_threshold": 5.862056787009351e-05,
+          "spectrogram_sha256": "16499cf7d603a4b418fc6e9f56764765599307995042c9d5ee0d390afee6e091"
         },
         {
           "key": "sam_audio_ft",
@@ -244,7 +263,8 @@
           "saj": 2.81212592,
           "predicted_label": 1,
           "novelty_score": 0.0008043818525038,
-          "selected_threshold": 3.671405283967033e-05
+          "selected_threshold": 3.671405283967033e-05,
+          "spectrogram_sha256": "b9c50e32b2e57b121542d93b8eb09b1796d6876d6afdc4c4dd0352d740f469c9"
         },
         {
           "key": "nne",
@@ -258,7 +278,8 @@
           "saj": 2.52270269,
           "predicted_label": 0,
           "novelty_score": 0.0021668276749551,
-          "selected_threshold": 0.0258292611688375
+          "selected_threshold": 0.0258292611688375,
+          "spectrogram_sha256": "039d29c4e0617a5bebf8f25ddf3158a28420bbcdc4c292a0c8248e72a4fc13bd"
         },
         {
           "key": "anomsep",
@@ -272,7 +293,8 @@
           "saj": 4.74904251,
           "predicted_label": 1,
           "novelty_score": 0.0004099643265362,
-          "selected_threshold": 4.967531640431844e-05
+          "selected_threshold": 4.967531640431844e-05,
+          "spectrogram_sha256": "aa867e1945a0c88532ec0ee8f85ce3787e6da176450f1ca2d800499d02d2f91e"
         }
       ],
       "attributions": [
@@ -316,7 +338,11 @@
         }
       ],
       "clap_gap": 0.35319573,
-      "nnr_db": -9.363797772291075
+      "nnr_db": -9.363797772291075,
+      "spectrogram_db_range": [
+        -101.00868911743164,
+        -38.39518718719482
+      ]
     },
     {
       "id": "eval_scene_airport_1_00184",
@@ -329,7 +355,7 @@
       "source_sequence_strategy": "concatenate_distinct_same_class_files",
       "duration": 5.0,
       "playback_gain": 0.9735668929959813,
-      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "spectrogram_reference": "Mixture dB spectrogram percentiles; shared limits for all seven tracks",
       "tracks": [
         {
           "key": "mixture",
@@ -341,7 +367,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "36622c2dacc79075eb1ee5fd08a542680fcae12582812458a582737b76f2830a"
         },
         {
           "key": "normal",
@@ -353,7 +380,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "4b993cb47d40113cf91b4f120b705291363e206499dbd6e9b77039f29b1e388c"
         },
         {
           "key": "novel",
@@ -365,7 +393,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "a9f01d83e8255251930898e69ec773d560b06ec2c4fdc8674aa0bea98043c011"
         },
         {
           "key": "sam_audio",
@@ -379,7 +408,8 @@
           "saj": 1.00948215,
           "predicted_label": 1,
           "novelty_score": 0.002126733539626,
-          "selected_threshold": 5.862056787009351e-05
+          "selected_threshold": 5.862056787009351e-05,
+          "spectrogram_sha256": "d95cfa6ff67405856906b423ed22641f47730de1890c1b2ee3b13ab4620d3950"
         },
         {
           "key": "sam_audio_ft",
@@ -393,7 +423,8 @@
           "saj": 1.6213342,
           "predicted_label": 1,
           "novelty_score": 0.0024417834356427,
-          "selected_threshold": 3.671405283967033e-05
+          "selected_threshold": 3.671405283967033e-05,
+          "spectrogram_sha256": "b1d56ac76d9def17c806bd7202717f738781b4d790548f83f291a637ae20ec85"
         },
         {
           "key": "nne",
@@ -407,7 +438,8 @@
           "saj": 1.05399716,
           "predicted_label": 0,
           "novelty_score": 0.0021145639475435,
-          "selected_threshold": 0.0258292611688375
+          "selected_threshold": 0.0258292611688375,
+          "spectrogram_sha256": "9e99d678e21531307478532e4c3d2dcb7e662bfde994fc70588a59601ec66840"
         },
         {
           "key": "anomsep",
@@ -421,7 +453,8 @@
           "saj": 4.22046757,
           "predicted_label": 1,
           "novelty_score": 0.0023178909905254,
-          "selected_threshold": 4.967531640431844e-05
+          "selected_threshold": 4.967531640431844e-05,
+          "spectrogram_sha256": "70c355305de8c080736f29c218b148aa9cf610839379943a8780873a87b5b4d6"
         }
       ],
       "attributions": [
@@ -455,7 +488,11 @@
         }
       ],
       "clap_gap": 0.33226483999999995,
-      "nnr_db": 0.8175433166283099
+      "nnr_db": 0.8175433166283099,
+      "spectrogram_db_range": [
+        -107.54336643218994,
+        -40.72609872817992
+      ]
     },
     {
       "id": "eval_scene_metro_station_1_00299",
@@ -468,7 +505,7 @@
       "source_sequence_strategy": "single_file_peak_center",
       "duration": 5.0,
       "playback_gain": 1.0,
-      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "spectrogram_reference": "Mixture dB spectrogram percentiles; shared limits for all seven tracks",
       "tracks": [
         {
           "key": "mixture",
@@ -480,7 +517,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "5a0b63d6701f7e4327304c2b171b466fdb5e2d5713954cccfe8119ef5cca2f44"
         },
         {
           "key": "normal",
@@ -492,7 +530,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "bda0d605f55b02694c95894e64e89700e25a009e9f1a8d0e8a0e472daccc226e"
         },
         {
           "key": "novel",
@@ -504,7 +543,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "db22d8c97e2582e0b1a2688b2dff856c7c5e3cd17e1cd1257872d8de3f819b67"
         },
         {
           "key": "sam_audio",
@@ -518,7 +558,8 @@
           "saj": 2.11645222,
           "predicted_label": 1,
           "novelty_score": 0.0058588325046002,
-          "selected_threshold": 1.4266126946438362e-08
+          "selected_threshold": 1.4266126946438362e-08,
+          "spectrogram_sha256": "02a301a6e98e6b24eb1206f6a2cb62372ad1c283ec87ad5af9615e3136075a35"
         },
         {
           "key": "sam_audio_ft",
@@ -532,7 +573,8 @@
           "saj": 1.28956032,
           "predicted_label": 1,
           "novelty_score": 0.0026348046958446,
-          "selected_threshold": 8.58748535392806e-06
+          "selected_threshold": 8.58748535392806e-06,
+          "spectrogram_sha256": "5bedb824eb6c6e5c834d860410a1b229b3e29031fe86bff52a4e2eafc42b0c79"
         },
         {
           "key": "nne",
@@ -546,7 +588,8 @@
           "saj": 1.59764946,
           "predicted_label": 0,
           "novelty_score": 0.0092975124716758,
-          "selected_threshold": 0.0180512554943561
+          "selected_threshold": 0.0180512554943561,
+          "spectrogram_sha256": "dda45847ee94d69b25a347648736626058c15428f09300662f6d6374d5ab212d"
         },
         {
           "key": "anomsep",
@@ -560,7 +603,8 @@
           "saj": 3.37231469,
           "predicted_label": 1,
           "novelty_score": 0.003492874559015,
-          "selected_threshold": 4.6745808504056185e-05
+          "selected_threshold": 4.6745808504056185e-05,
+          "spectrogram_sha256": "fb0ef98d3eba688bae1fb5e0e63de894c3cc2015b4a0972416e12b729250a9a1"
         }
       ],
       "attributions": [
@@ -584,7 +628,11 @@
         }
       ],
       "clap_gap": 0.51826013,
-      "nnr_db": -8.244167014787031
+      "nnr_db": -8.244167014787031,
+      "spectrogram_db_range": [
+        -109.76514167785645,
+        -32.05627202987671
+      ]
     },
     {
       "id": "eval_scene_metro_station_1_00522",
@@ -597,7 +645,7 @@
       "source_sequence_strategy": "single_file_peak_center",
       "duration": 5.0,
       "playback_gain": 1.0,
-      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "spectrogram_reference": "Mixture dB spectrogram percentiles; shared limits for all seven tracks",
       "tracks": [
         {
           "key": "mixture",
@@ -609,7 +657,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "906db34389a76f06fc15483f8b5811e97b335abf0fc47545d04d05f56183108c"
         },
         {
           "key": "normal",
@@ -621,7 +670,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "3559ea8c058364a4ed4652f3c453290ece98155cfeb4ed8fd91dde39f5a6e18f"
         },
         {
           "key": "novel",
@@ -633,7 +683,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "71b08dfe1e811be4ae5d88a637ae99c2583fcfb7fcec22e12e0c38ef04a78709"
         },
         {
           "key": "sam_audio",
@@ -647,7 +698,8 @@
           "saj": 1.0596664,
           "predicted_label": 1,
           "novelty_score": 0.0242685973644256,
-          "selected_threshold": 1.4266126946438362e-08
+          "selected_threshold": 1.4266126946438362e-08,
+          "spectrogram_sha256": "6d044f2b101b4fc6326c1c3722d72f55dd7f0798a68abc2edc8ae1e53dbd6f2a"
         },
         {
           "key": "sam_audio_ft",
@@ -661,7 +713,8 @@
           "saj": 1.00154459,
           "predicted_label": 0,
           "novelty_score": 1.2935403859160033e-08,
-          "selected_threshold": 8.58748535392806e-06
+          "selected_threshold": 8.58748535392806e-06,
+          "spectrogram_sha256": "4a9ee5c533556dac7b791967ba3f675ce4bb94136c0a57ebf535a59a629ac065"
         },
         {
           "key": "nne",
@@ -675,7 +728,8 @@
           "saj": 1.32843733,
           "predicted_label": 1,
           "novelty_score": 0.0221860352903604,
-          "selected_threshold": 0.0180512554943561
+          "selected_threshold": 0.0180512554943561,
+          "spectrogram_sha256": "694b24ecfb08f13cd6058036c56aebbaa0ffe11683afa6c347b435396b439f2b"
         },
         {
           "key": "anomsep",
@@ -689,7 +743,8 @@
           "saj": 3.8161397,
           "predicted_label": 1,
           "novelty_score": 0.0075384308584034,
-          "selected_threshold": 4.6745808504056185e-05
+          "selected_threshold": 4.6745808504056185e-05,
+          "spectrogram_sha256": "f1abf3fdbe3287e9968aa251c14500fb069861445bb2e11d4c66ca8e4dc3461a"
         }
       ],
       "attributions": [
@@ -712,7 +767,11 @@
         }
       ],
       "clap_gap": 0.30053079000000005,
-      "nnr_db": -6.004041881435446
+      "nnr_db": -6.004041881435446,
+      "spectrogram_db_range": [
+        -99.20494728088379,
+        -29.476127624511687
+      ]
     },
     {
       "id": "eval_scene_airport_0_00295",
@@ -725,7 +784,7 @@
       "source_sequence_strategy": null,
       "duration": 5.0,
       "playback_gain": 1.0,
-      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "spectrogram_reference": "Mixture dB spectrogram percentiles; shared limits for all seven tracks",
       "tracks": [
         {
           "key": "mixture",
@@ -737,7 +796,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "4c5f52fa74f52a0fd06afc9a33f3f4b4002a053f90462d98def4a8cfb2786bed"
         },
         {
           "key": "normal",
@@ -749,7 +809,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "4c5f52fa74f52a0fd06afc9a33f3f4b4002a053f90462d98def4a8cfb2786bed"
         },
         {
           "key": "novel",
@@ -761,7 +822,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "f30a0ce3180cec1604748e386adedd6108166b72fa1ee20fcadf5f3bb0d12bf7"
         },
         {
           "key": "sam_audio",
@@ -775,7 +837,8 @@
           "saj": null,
           "predicted_label": 1,
           "novelty_score": 0.0358600206673145,
-          "selected_threshold": 5.862056787009351e-05
+          "selected_threshold": 5.862056787009351e-05,
+          "spectrogram_sha256": "c391f9601f6039398a2f92e7ba0e3e7317eeedbdc63c988e41fbaa286fd78d5d"
         },
         {
           "key": "sam_audio_ft",
@@ -789,7 +852,8 @@
           "saj": null,
           "predicted_label": 1,
           "novelty_score": 0.0255962274968624,
-          "selected_threshold": 3.671405283967033e-05
+          "selected_threshold": 3.671405283967033e-05,
+          "spectrogram_sha256": "57f333cca7eb612867c102e636878e4b88c51515249ae743120ce68bde43964f"
         },
         {
           "key": "nne",
@@ -803,7 +867,8 @@
           "saj": null,
           "predicted_label": 0,
           "novelty_score": 0.0062037636525928,
-          "selected_threshold": 0.0258292611688375
+          "selected_threshold": 0.0258292611688375,
+          "spectrogram_sha256": "aeb67eab3f1833df2349f1f279b91e390b49dfe24bd62f3d693d5ef98a8ee82d"
         },
         {
           "key": "anomsep",
@@ -817,7 +882,8 @@
           "saj": null,
           "predicted_label": 0,
           "novelty_score": 8.999516687424602e-09,
-          "selected_threshold": 4.967531640431844e-05
+          "selected_threshold": 4.967531640431844e-05,
+          "spectrogram_sha256": "efba0dbabebba36a78262aba37cbc74cd2b86e838b1be5399b5e5b8f5e84894f"
         }
       ],
       "attributions": [
@@ -829,6 +895,10 @@
           "license": "Experimental and non-commercial use only",
           "license_url": "licenses/TAU-2019-LICENSE.txt"
         }
+      ],
+      "spectrogram_db_range": [
+        -104.28347949981689,
+        -31.278683567047107
       ]
     },
     {
@@ -842,7 +912,7 @@
       "source_sequence_strategy": null,
       "duration": 5.0,
       "playback_gain": 1.0,
-      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "spectrogram_reference": "Mixture dB spectrogram percentiles; shared limits for all seven tracks",
       "tracks": [
         {
           "key": "mixture",
@@ -854,7 +924,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "bc7d210ffa69b5638ea57f91dea73cf4a2f58ebc405fe10cc03b84826f428685"
         },
         {
           "key": "normal",
@@ -866,7 +937,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "bc7d210ffa69b5638ea57f91dea73cf4a2f58ebc405fe10cc03b84826f428685"
         },
         {
           "key": "novel",
@@ -878,7 +950,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "f30a0ce3180cec1604748e386adedd6108166b72fa1ee20fcadf5f3bb0d12bf7"
         },
         {
           "key": "sam_audio",
@@ -892,7 +965,8 @@
           "saj": null,
           "predicted_label": 1,
           "novelty_score": 0.0256124697625637,
-          "selected_threshold": 5.862056787009351e-05
+          "selected_threshold": 5.862056787009351e-05,
+          "spectrogram_sha256": "af03c607449580d526171328fc77468bc58561c4a993627b9f4e7f507d905fb8"
         },
         {
           "key": "sam_audio_ft",
@@ -906,7 +980,8 @@
           "saj": null,
           "predicted_label": 1,
           "novelty_score": 0.0251816343516111,
-          "selected_threshold": 3.671405283967033e-05
+          "selected_threshold": 3.671405283967033e-05,
+          "spectrogram_sha256": "933cc4101da6ac09dde6fb2a422030054f032cad3c8af67a0725abb253146ba9"
         },
         {
           "key": "nne",
@@ -920,7 +995,8 @@
           "saj": null,
           "predicted_label": 0,
           "novelty_score": 0.0249732546508312,
-          "selected_threshold": 0.0258292611688375
+          "selected_threshold": 0.0258292611688375,
+          "spectrogram_sha256": "b7e9bfbce4e5c7ea75cdc13d1b562fc1279109198b2919ce2db43815b3afedc5"
         },
         {
           "key": "anomsep",
@@ -934,7 +1010,8 @@
           "saj": null,
           "predicted_label": 0,
           "novelty_score": 1.3185753822142487e-08,
-          "selected_threshold": 4.967531640431844e-05
+          "selected_threshold": 4.967531640431844e-05,
+          "spectrogram_sha256": "578f31726f0ba60dbe08e71ad4a3138f00c42c70454137800dbb7064600960d8"
         }
       ],
       "attributions": [
@@ -946,6 +1023,10 @@
           "license": "Experimental and non-commercial use only",
           "license_url": "licenses/TAU-2019-LICENSE.txt"
         }
+      ],
+      "spectrogram_db_range": [
+        -103.32870483398438,
+        -28.831933212280262
       ]
     },
     {
@@ -959,7 +1040,7 @@
       "source_sequence_strategy": null,
       "duration": 5.0,
       "playback_gain": 1.0,
-      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "spectrogram_reference": "Mixture dB spectrogram percentiles; shared limits for all seven tracks",
       "tracks": [
         {
           "key": "mixture",
@@ -971,7 +1052,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "d56501c089242a25b71b31e03b6d055f1d73b31c961039fa92e2b38b392e7928"
         },
         {
           "key": "normal",
@@ -983,7 +1065,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "d56501c089242a25b71b31e03b6d055f1d73b31c961039fa92e2b38b392e7928"
         },
         {
           "key": "novel",
@@ -995,7 +1078,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "f30a0ce3180cec1604748e386adedd6108166b72fa1ee20fcadf5f3bb0d12bf7"
         },
         {
           "key": "sam_audio",
@@ -1009,7 +1093,8 @@
           "saj": null,
           "predicted_label": 1,
           "novelty_score": 0.0307361390441656,
-          "selected_threshold": 1.4266126946438362e-08
+          "selected_threshold": 1.4266126946438362e-08,
+          "spectrogram_sha256": "ac41a9e3887c5cf0707b795e815e9764724c2673507d3ebe0e1a0582a63935ab"
         },
         {
           "key": "sam_audio_ft",
@@ -1023,7 +1108,8 @@
           "saj": null,
           "predicted_label": 1,
           "novelty_score": 0.0222124345600605,
-          "selected_threshold": 8.58748535392806e-06
+          "selected_threshold": 8.58748535392806e-06,
+          "spectrogram_sha256": "9122dfdea343e1351053a81133af6f9eaf04c81e752eacf4f53756943cae1d29"
         },
         {
           "key": "nne",
@@ -1037,7 +1123,8 @@
           "saj": null,
           "predicted_label": 0,
           "novelty_score": 0.0072104455903172,
-          "selected_threshold": 0.0180512554943561
+          "selected_threshold": 0.0180512554943561,
+          "spectrogram_sha256": "14c3f89b591c5042e750dc3c733ad5f2013abf8bf728a3cf386f7c920afcd6af"
         },
         {
           "key": "anomsep",
@@ -1051,7 +1138,8 @@
           "saj": null,
           "predicted_label": 0,
           "novelty_score": 9.059790251342292e-09,
-          "selected_threshold": 4.6745808504056185e-05
+          "selected_threshold": 4.6745808504056185e-05,
+          "spectrogram_sha256": "a5a8e0a5c750af4c516b78d8c62cf00e2b0e2794f48b93774cf9033a2a93d295"
         }
       ],
       "attributions": [
@@ -1063,6 +1151,10 @@
           "license": "Experimental and non-commercial use only",
           "license_url": "licenses/TAU-2019-LICENSE.txt"
         }
+      ],
+      "spectrogram_db_range": [
+        -106.64203109741212,
+        -31.487644386291496
       ]
     },
     {
@@ -1076,7 +1168,7 @@
       "source_sequence_strategy": null,
       "duration": 5.0,
       "playback_gain": 1.0,
-      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "spectrogram_reference": "Mixture dB spectrogram percentiles; shared limits for all seven tracks",
       "tracks": [
         {
           "key": "mixture",
@@ -1088,7 +1180,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "c699aff0d9d8de940192524383d13484670afe0799905d8beb53149c97713a80"
         },
         {
           "key": "normal",
@@ -1100,7 +1193,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "c699aff0d9d8de940192524383d13484670afe0799905d8beb53149c97713a80"
         },
         {
           "key": "novel",
@@ -1112,7 +1206,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "f30a0ce3180cec1604748e386adedd6108166b72fa1ee20fcadf5f3bb0d12bf7"
         },
         {
           "key": "sam_audio",
@@ -1126,7 +1221,8 @@
           "saj": null,
           "predicted_label": 1,
           "novelty_score": 0.0505968295037746,
-          "selected_threshold": 1.4266126946438362e-08
+          "selected_threshold": 1.4266126946438362e-08,
+          "spectrogram_sha256": "0df8da3a61883c8e9031bbaac3e8998b1b3937968c28cb5acc07d0a627f5a7d9"
         },
         {
           "key": "sam_audio_ft",
@@ -1140,7 +1236,8 @@
           "saj": null,
           "predicted_label": 1,
           "novelty_score": 0.0332185477018356,
-          "selected_threshold": 8.58748535392806e-06
+          "selected_threshold": 8.58748535392806e-06,
+          "spectrogram_sha256": "ccb782b500601ef6aa132882fb485ed622c3416b537301935c3c8ec4f5ad60b4"
         },
         {
           "key": "nne",
@@ -1154,7 +1251,8 @@
           "saj": null,
           "predicted_label": 0,
           "novelty_score": 0.0063071534968912,
-          "selected_threshold": 0.0180512554943561
+          "selected_threshold": 0.0180512554943561,
+          "spectrogram_sha256": "894d83af5a1d692e7c6d8384df3252ba3fa6843eb282c679895eaa783b4e5ef7"
         },
         {
           "key": "anomsep",
@@ -1168,7 +1266,8 @@
           "saj": null,
           "predicted_label": 0,
           "novelty_score": 1.3560591760608533e-08,
-          "selected_threshold": 4.6745808504056185e-05
+          "selected_threshold": 4.6745808504056185e-05,
+          "spectrogram_sha256": "3c8512b8191042357d0609ecac72e3aa7c1a9c3acf0ad6a6d70af48b5c50da1c"
         }
       ],
       "attributions": [
@@ -1180,6 +1279,10 @@
           "license": "Experimental and non-commercial use only",
           "license_url": "licenses/TAU-2019-LICENSE.txt"
         }
+      ],
+      "spectrogram_db_range": [
+        -101.03503322601318,
+        -37.27528972625733
       ]
     },
     {
@@ -1193,7 +1296,7 @@
       "source_sequence_strategy": null,
       "duration": 5.0,
       "playback_gain": 1.0,
-      "spectrogram_reference": "Maximum STFT magnitude across all seven tracks in this example",
+      "spectrogram_reference": "Mixture dB spectrogram percentiles; shared limits for all seven tracks",
       "tracks": [
         {
           "key": "mixture",
@@ -1205,7 +1308,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "8a01612ed1f3970d57b8f566bb2504797f1886488d2def5a8dde1fffa5807258"
         },
         {
           "key": "normal",
@@ -1217,7 +1321,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "8a01612ed1f3970d57b8f566bb2504797f1886488d2def5a8dde1fffa5807258"
         },
         {
           "key": "novel",
@@ -1229,7 +1334,8 @@
           "sample_rate": 16000,
           "clap": null,
           "saj": null,
-          "predicted_label": null
+          "predicted_label": null,
+          "spectrogram_sha256": "f30a0ce3180cec1604748e386adedd6108166b72fa1ee20fcadf5f3bb0d12bf7"
         },
         {
           "key": "sam_audio",
@@ -1243,7 +1349,8 @@
           "saj": null,
           "predicted_label": 1,
           "novelty_score": 0.0305473748594522,
-          "selected_threshold": 1.3935786746799296e-08
+          "selected_threshold": 1.3935786746799296e-08,
+          "spectrogram_sha256": "0e4fdd341bdc7f07965e998963da928c5d714b5c2358a0d10d855ceac99c2f00"
         },
         {
           "key": "sam_audio_ft",
@@ -1257,7 +1364,8 @@
           "saj": null,
           "predicted_label": 1,
           "novelty_score": 0.0194212961941957,
-          "selected_threshold": 8.639468433102593e-05
+          "selected_threshold": 8.639468433102593e-05,
+          "spectrogram_sha256": "a545a0158fb1bdc843a2e732d7c7e55b3c3d861647b6b781efe3779c8df34068"
         },
         {
           "key": "nne",
@@ -1271,7 +1379,8 @@
           "saj": null,
           "predicted_label": 1,
           "novelty_score": 0.0268591344356536,
-          "selected_threshold": 0.0085272565484046
+          "selected_threshold": 0.0085272565484046,
+          "spectrogram_sha256": "9aae80d0655986697c5fbe293f7f3506b158c1b350f0602b79526564aa6d07a9"
         },
         {
           "key": "anomsep",
@@ -1285,7 +1394,8 @@
           "saj": null,
           "predicted_label": 0,
           "novelty_score": 1.0985631071491753e-08,
-          "selected_threshold": 3.867344639729709e-05
+          "selected_threshold": 3.867344639729709e-05,
+          "spectrogram_sha256": "aa2bde19b81199cb5eb79bef1ba5089381e4f3d068a774fc9a24b60c9a3ed304"
         }
       ],
       "attributions": [
@@ -1297,6 +1407,10 @@
           "license": "Experimental and non-commercial use only",
           "license_url": "licenses/TAU-2019-LICENSE.txt"
         }
+      ],
+      "spectrogram_db_range": [
+        -103.67607078552246,
+        -27.25537824630736
       ]
     }
   ]

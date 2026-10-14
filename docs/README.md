@@ -42,6 +42,17 @@ builder reuses the checked-in license snapshots. If those files are absent, the
 builder obtains the ESC-50 license and Human Screaming dataset metadata from their
 official public endpoints.
 
+To update only the spectrograms from the committed WAVs, without the original
+experiment outputs, run:
+
+```sh
+conda run --no-capture-output -n sam-audio-new python scripts/build_project_page.py \
+  --refresh-spectrograms --output docs
+```
+
+This preserves the audio, example selection, scores, and detection decisions. The
+builder refreshes the image hashes and cache versions for the manifest and script.
+
 ## Input schema
 
 Paths below are relative to the experiment root.
@@ -73,8 +84,12 @@ strings. All sources in a concatenated sequence are credited.
   four methods' estimated anomalous components.
 - FLOAT WAV preserves amplitudes. A single shared attenuation applies only when
   at least one original track exceeds full scale. No independent normalization.
-- Every spectrogram within one example shares its magnitude reference and
-  displayed decibel range. Metrics and predictions are copied from saved results.
+- Every spectrogram uses a fixed amplitude reference of 1.0. The 2.5th and 97.5th
+  percentiles of the mixture's dB spectrogram determine the shared color limits
+  for all seven tracks, using linear percentile interpolation. The unrounded
+  limits are stored per example; values outside those limits use the endpoint
+  colors. Silent anomalous references use the same limits as the mixture.
+  Metrics and predictions are copied from saved results.
 - `assets/project-data.json` records the selection policy, source-table and audio
   hashes, sample IDs, relative exported paths, gains, metrics, predictions,
   thresholds, and source credits. Machine-specific source paths are excluded.
